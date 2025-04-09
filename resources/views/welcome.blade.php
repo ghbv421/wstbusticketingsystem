@@ -20,7 +20,14 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#ffffff] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+    <body class="text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col" 
+      style="background-image: url('images/bus3.png'); 
+             background-size: cover; 
+             background-position: center; 
+             background-repeat: no-repeat;
+             background-attachment: fixed;">
+    
+
         <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
