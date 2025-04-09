@@ -17,7 +17,7 @@ class BusController extends Controller
 
     public function store(Request $request){
         $data = $request->validate([
-            'name' => 'required',
+            'bus_type' => 'required',
             'description' => 'nullable'
         ]);
 

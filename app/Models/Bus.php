@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bus extends Model
 {
+    protected $table = 'bus_table';
+
     protected $fillable = [
-        'name',
+        'bus_type',
         'description'
     ];
 }

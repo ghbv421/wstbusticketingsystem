@@ -7,15 +7,15 @@
 </head>
 <body>
     <h1>Register Bus</h1>
-    <form action="{{route('admin.bus.store')}}" method="post">
+    <form action="{{ route('admin.bus.store') }}" method="POST">
         @csrf
         @method('post')
         <div>
-            <label for="">Type</label>
-            <input type="text" name="name" placeholder="Name">
+            <label for="bus_type">Bus Type</label>
+            <input type="text" name="bus_type" placeholder="Type" required>
         </div>
         <div>
-            <label for="">Description</label>
+            <label for="description">Description</label>
             <input type="text" name="description" placeholder="Description">
         </div>
         <div>
