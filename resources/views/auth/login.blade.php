@@ -1,6 +1,14 @@
 <link rel="icon" href="{{ asset('M3VALLE.ico') }}" type="image/x-icon">
+<body class="flex items-center justify-center min-h-screen" 
+      style="background-image: url('images/bus3.png'); 
+             background-size: cover; 
+             background-position: center; 
+             background-repeat: no-repeat;
+             background-attachment: fixed;">
+
 <x-guest-layout>
-    <!-- Session Status -->
+    <!-- Transparent form container with blur effect -->
+    <div class="backdrop-blur-sm bg-white/10 dark:bg-gray-900/10 p-8 rounded-lg shadow-lg border border-white/20 w-full max-w-md">
     <x-auth-session-status class="mb-4" :status="session('status')" />
     
 
