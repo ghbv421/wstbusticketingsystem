@@ -35,7 +35,7 @@ class EmployeesController extends Controller
             'position' => 'required'
         ]);
     
-        // Create a new bus entry in the database
+
         Employees::create([
             'name' => $request->name,
             'email' => $request->email,

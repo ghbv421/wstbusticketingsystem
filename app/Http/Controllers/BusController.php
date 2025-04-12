@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class BusController extends Controller
 {
     public function index(){
-        $Buses = Bus::all(); // fetch all records from the database
+        $Buses = Bus::all(); 
 
         return view('admin.bus.index', compact('Buses'));
     }

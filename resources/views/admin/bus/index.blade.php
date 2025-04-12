@@ -14,7 +14,7 @@
         <div class="flex justify-center">
             <div class="flex space-x-6 overflow-x-auto pb-4">
                 @foreach ($Buses as $Bus)
-                    <!-- Make each bus card clickable -->
+
                     <a href="{{ route('admin.bus.show', $Bus->id) }}" class="min-w-[200px] bg-white rounded-xl shadow p-4 flex-shrink-0 block">
                         <p class="text-lg font-semibold text-gray-700">{{ $Bus->bus_type }}</p>
                         <p class="text-sm text-gray-500 mt-2">{{ $Bus->description }}</p>

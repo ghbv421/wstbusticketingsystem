@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';            //method          //nameoftheroute
+//admin index
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+
+
 
 //BUS
 
@@ -37,4 +43,6 @@ Route::get('admin/employees/{id}', [EmployeesController::class, 'show'])->name('
 Route::get('admin/employees/{id}/edit', [EmployeesController::class, 'edit'])->name('admin.employees.edit');
 Route::put('admin/employees/{id}', [EmployeesController::class, 'update'])->name('admin.employees.update');
 Route::delete('admin/employees/{id}', [EmployeesController::class, 'destroy'])->name('admin.employees.destroy');
+
+
 
