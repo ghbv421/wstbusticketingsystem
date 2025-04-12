@@ -42,10 +42,11 @@
         </label>
     </div>
 
-        <x-primary-button class="ms-3">
-            {{ __('Log in') }}
-        </x-primary-button>
-    </div>
+    <div class="flex justify-center mt-6">
+    <x-primary-button class="bg-red-600 text-white hover:bg-red-700 px-6 py-2 rounded-md">
+        {{ __('Log in') }}
+    </x-primary-button>
+</div>
 </form>
 
 <style>
