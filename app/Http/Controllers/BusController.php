@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 class BusController extends Controller
 {
     public function index(){
-        return view('admin.bus.admin-bus');
+        $Buses = Bus::all(); // fetch all records from the database
+
+        return view('admin.bus.index', compact('Buses'));
     }
 
     public function register(){
@@ -23,6 +25,32 @@ class BusController extends Controller
 
         $newBus = Bus::create($data);
 
-        return redirect(route('admin.bus.admin-bus'));
+        return redirect(route('admin.bus.index'));
+    }
+
+    public function show($id)
+    {
+        $bus = Bus::findOrFail($id);
+
+        return view('admin.bus.show', compact('bus'));
+    }
+
+    public function edit($id)
+    {
+        //
+    }
+
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    public function destroy($id)
+    {
+        $bus = Bus::findOrFail($id);
+
+        $bus->delete();
+
+        return redirect()->route('admin.bus.index')->with('success', 'Bus deleted successfully.');
     }
 }

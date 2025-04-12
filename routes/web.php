@@ -20,6 +20,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';            //method          //nameoftheroute
 
-Route::get('admin/bus', [BusController::class, 'index'])->name('admin.bus.admin-bus');
+//BUS
+
+Route::get('admin/bus', [BusController::class, 'index'])->name('admin.bus.index');
 Route::get('admin/bus/register', [BusController::class, 'register'])->name('admin.bus.register'); 
 Route::post('admin/bus', [BusController::class, 'store'])->name('admin.bus.store'); 
+Route::get('admin/bus/{id}', [BusController::class, 'show'])->name('admin.bus.show');
+Route::delete('admin/bus/{id}', [BusController::class, 'destroy'])->name('admin.bus.destroy');
