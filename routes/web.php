@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusController;
+use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,3 +28,13 @@ Route::get('admin/bus/register', [BusController::class, 'register'])->name('admi
 Route::post('admin/bus', [BusController::class, 'store'])->name('admin.bus.store'); 
 Route::get('admin/bus/{id}', [BusController::class, 'show'])->name('admin.bus.show');
 Route::delete('admin/bus/{id}', [BusController::class, 'destroy'])->name('admin.bus.destroy');
+
+//Employee
+Route::get('admin/employees', [EmployeesController::class, 'index'])->name('admin.employees.index');
+Route::get('admin/employees/create', [EmployeesController::class, 'create'])->name('admin.employees.create');
+Route::post('admin/employees', [EmployeesController::class, 'store'])->name('admin.employees.store');
+Route::get('admin/employees/{id}', [EmployeesController::class, 'show'])->name('admin.employees.show');
+Route::get('admin/employees/{id}/edit', [EmployeesController::class, 'edit'])->name('admin.employees.edit');
+Route::put('admin/employees/{id}', [EmployeesController::class, 'update'])->name('admin.employees.update');
+Route::delete('admin/employees/{id}', [EmployeesController::class, 'destroy'])->name('admin.employees.destroy');
+
