@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bus List</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{{ asset('M3VALLE.ico') }}" type="image/x-icon">
 </head>
+
 <body class="bg-gray-100 text-gray-800 min-h-screen">
+<body class="flex items-center justify-center min-h-screen" 
+      style="background-image: url('images/b3.png'); 
+             background-size: cover; 
+             background-position: center; 
+             background-repeat: no-repeat;
+             background-attachment: fixed;">
 
     <div class="p-6 w-full max-w-6xl mx-auto">
         <h1 class="text-3xl font-bold mb-8 text-center text-blue-700">Bus List</h1>
