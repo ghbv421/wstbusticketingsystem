@@ -5,6 +5,7 @@ use App\Http\Controllers\BusController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RevenueController;
 
 Route::get('/', function () {
@@ -50,4 +51,21 @@ Route::delete('admin/employees/{id}', [EmployeesController::class, 'destroy'])->
 Route::get('/admin/revenue', [RevenueController::class, 'index'])->name('revenue.index');
 Route::get('/revenue/add', [RevenueController::class, 'create'])->name('revenue.create');
 Route::post('/revenue/store', [RevenueController::class, 'store'])->name('revenue.store');
+
+//Login Auth
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/admin', function () {
+        if (!in_array(Auth::id(), [1, 2])) {
+            abort(403); // forbidden
+        }
+
+        return view('admin.index'); // make sure this view exists
+    });
+
+    Route::get('/user', function () {
+        return view('user.index'); // make sure this view exists too
+    });
+
+});
 
