@@ -5,6 +5,7 @@ use App\Http\Controllers\BusController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RevenueController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -44,5 +45,9 @@ Route::get('admin/employees/{id}/edit', [EmployeesController::class, 'edit'])->n
 Route::put('admin/employees/{id}', [EmployeesController::class, 'update'])->name('admin.employees.update');
 Route::delete('admin/employees/{id}', [EmployeesController::class, 'destroy'])->name('admin.employees.destroy');
 
+// Revenue
 
+Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
+Route::get('/revenue/add', [RevenueController::class, 'create'])->name('revenue.create');
+Route::post('/revenue/store', [RevenueController::class, 'store'])->name('revenue.store');
 
