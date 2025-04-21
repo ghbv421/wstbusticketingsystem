@@ -11,13 +11,13 @@ class RevenueController extends Controller
     public function index()
     {
         $revenues = Revenue::orderBy('date')->get();
-        return view('revenue.index', compact('revenues'));
+        return view('admin.revenues.index', compact('revenues'));
     }
 
     // Show form to add revenue
     public function create()
     {
-        return view('revenue.add');
+        return view('admin.revenues.add');
     }
 
     // Save new revenue

@@ -47,7 +47,7 @@ Route::delete('admin/employees/{id}', [EmployeesController::class, 'destroy'])->
 
 // Revenue
 
-Route::get('/revenue', [RevenueController::class, 'index'])->name('revenue.index');
+Route::get('/admin/revenue', [RevenueController::class, 'index'])->name('revenue.index');
 Route::get('/revenue/add', [RevenueController::class, 'create'])->name('revenue.create');
 Route::post('/revenue/store', [RevenueController::class, 'store'])->name('revenue.store');
 

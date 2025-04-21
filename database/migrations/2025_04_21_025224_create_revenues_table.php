@@ -1,5 +1,3 @@
-<!-- Erase comment or copy this code after migration
-
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -30,4 +28,3 @@ return new class extends Migration
         Schema::dropIfExists('revenues');
     }
 };
--->
