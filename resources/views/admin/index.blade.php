@@ -17,10 +17,6 @@
            background-repeat: no-repeat;
            background-attachment: fixed;">
 
-           <div>
-            <a href="{{route('logout.welcome')}}">log out</a>
-           </div>
-
     <div class="w-full max-w-4xl mx-auto bg-white p-10 rounded-xl shadow-2xl">
 
         <h1 class="text-4xl font-extrabold text-center text-black mb-8">Admin Dashboard</h1>
@@ -57,6 +53,13 @@
             <p class="text-gray-600 text-lg">Select an option above to manage the system.</p>
         </div>
 
+        
+        <div class="flex justify-end mt-6">
+            <a href="{{ route('logout.welcome') }}" 
+            class="bg-gray-700 text-white px-5 py-2 rounded-lg hover:bg-gray-800 transition-all duration-300 text-sm shadow-md">
+                Log Out
+            </a>
+        </div>
     </div>
 
 </body>
