@@ -60,12 +60,15 @@ Route::middleware(['auth'])->group(function () {
             abort(403); // forbidden
         }
 
-        return view('admin.index'); // make sure this view exists
+        return view('admin.index'); 
     });
 
     Route::get('/user', function () {
-        return view('user.index'); // make sure this view exists too
+        return view('user.index'); 
     });
 
 });
+
+//Conductor route
+
 

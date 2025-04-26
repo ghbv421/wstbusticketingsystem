@@ -7,5 +7,9 @@
 </head>
 <body>
     <h1>This is Conductor Dashboard</h1>
+
+    <div>
+        <a href="{{route('logout.welcome')}}" class="b-2">Log Out</a>
+    </div>
 </body>
 </html>

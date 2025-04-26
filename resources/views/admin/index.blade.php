@@ -17,6 +17,10 @@
            background-repeat: no-repeat;
            background-attachment: fixed;">
 
+           <div>
+            <a href="{{route('logout.welcome')}}">log out</a>
+           </div>
+
     <div class="w-full max-w-4xl mx-auto bg-white p-10 rounded-xl shadow-2xl">
 
         <h1 class="text-4xl font-extrabold text-center text-black mb-8">Admin Dashboard</h1>
