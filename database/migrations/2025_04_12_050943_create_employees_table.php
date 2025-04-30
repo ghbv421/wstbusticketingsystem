@@ -16,6 +16,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('position');
+            $table->string('age');
+            $table->string('sex');
+            $table->string('address');
+            $table->string('phone');
             $table->timestamps();
         });
     }

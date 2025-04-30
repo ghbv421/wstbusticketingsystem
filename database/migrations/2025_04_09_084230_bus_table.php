@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("bus_type");
             $table->text("description");
+            $table->time("departure_time")->nullable();
+            $table->time("arrival_time")->nullable();
+            $table->string("driver")->nullable()->default('SELECT');
+            $table->string("conductor")->nullable()->default('SELECT');
+            $table->string("status")->nullable()->default('SELECT');
             $table->timestamps();
         });
     }

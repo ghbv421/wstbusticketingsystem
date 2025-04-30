@@ -8,50 +8,81 @@
     <link rel="icon" href="{{ asset('M3VALLE.ico') }}" type="image/x-icon">
 </head>
 
-<body class="bg-gray-100 text-gray-800 min-h-screen p-6">
-<body class="flex items-center justify-center min-h-screen" 
-      style="background-image: url('images/b3.png'); 
+<body class="min-h-screen" 
+      style="background-image: url('images/bus2.jpg'); 
              background-size: cover; 
              background-position: center; 
-             background-repeat: no-repeat;
+             background-repeat: no-repeat; 
              background-attachment: fixed;">
 
-    <div class="max-w-5xl mx-auto">
-        <h1 class="text-3xl font-bold text-center text-blue-700 mb-8">Employee List</h1>
-
-        @if($employees->isEmpty())
-            <p class="text-center text-gray-500">No employees found.</p>
-        @else
-            <div class="overflow-x-auto bg-white rounded-lg shadow p-6 mb-8">
-                <table class="w-full table-auto">
-                    <thead class="bg-blue-600 text-white">
-                        <tr>
-                            <th class="text-left px-4 py-2">Name</th>
-                            <th class="text-left px-4 py-2">Email</th>
-                            <th class="text-left px-4 py-2">Position</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($employees as $employee)
-                            <tr 
-                                class="border-b hover:bg-gray-100 cursor-pointer"
-                                onclick="window.location='<?php echo route('admin.employees.show', $employee->id); ?>'">
-                                <td class="px-4 py-2">{{ $employee->name }}</td>
-                                <td class="px-4 py-2">{{ $employee->email }}</td>
-                                <td class="px-4 py-2">{{ $employee->position }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+    <div class="bg-red-900 bg-opacity-90 min-h-screen px-4 py-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+                <div class="bg-white text-black font-bold py-2 px-4 rounded shadow">
+                        <p>EMPLOYEES</p>
+                </div>
+                <div class="text-white text-2xl">
+                    <i class="fas fa-user-circle"></i>
+                </div>
             </div>
-        @endif
 
-        <div class="text-center">
-            <a href="{{ route('admin.employees.create') }}" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
-                Add Employee
-            </a>
+            <!-- Search Bar -->
+            <div class="flex justify-center mb-6">
+                <div class="w-full md:w-1/2 relative">
+                    <input type="text" placeholder="Search"
+                           class="w-full pl-10 pr-4 py-2 rounded-full shadow focus:outline-none focus:ring-2 focus:ring-white">
+                    <span class="absolute left-3 top-2.5 text-gray-500">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M21 21l-4.35-4.35M16.65 16.65A7.5 7.5 0 1116.65 2a7.5 7.5 0 010 15z"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Employee Table -->
+            @if($employees->isEmpty())
+                <p class="text-center text-white">No employees found.</p>
+            @else
+                <div class="overflow-x-auto bg-white rounded-lg shadow p-4 mb-6">
+                    <table class="w-full table-auto text-sm">
+                        <thead class="bg-gray-200 text-gray-700">
+                            <tr>
+                                <th class="text-left px-4 py-2">Name</th>
+                                <th class="text-left px-4 py-2">Age</th>
+                                <th class="text-left px-4 py-2">Sex</th>
+                                <th class="text-left px-4 py-2">Address</th>
+                                <th class="text-left px-4 py-2">Phone</th>
+                                <th class="text-left px-4 py-2">Employee Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($employees as $employee)
+                                <tr class="border-b hover:bg-gray-100 cursor-pointer"
+                                    onclick="window.location='{{ route('admin.employees.show', $employee->id) }}'">
+                                    <td class="px-4 py-2">{{ $employee->name }}</td>
+                                    <td class="px-4 py-2">{{ $employee->age }}</td>
+                                    <td class="px-4 py-2">{{ $employee->sex }}</td>
+                                    <td class="px-4 py-2">{{ $employee->address }}</td>
+                                    <td class="px-4 py-2">{{ $employee->phone }}</td>
+                                    <td class="px-4 py-2">{{ $employee->position }}</td> <!-- Assuming this holds 'Driver', 'Conductor', etc. -->
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+
+            <!-- Add Button -->
+            <div class="text-center">
+                <a href="{{ route('admin.employees.create') }}" 
+                   class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                    Add Employee
+                </a>
+            </div>
+            
         </div>
-
     </div>
 
 </body>

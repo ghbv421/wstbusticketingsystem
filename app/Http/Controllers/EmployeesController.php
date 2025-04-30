@@ -11,8 +11,9 @@ class EmployeesController extends Controller
      * Display a listing of the resource.
      */
     public function index()
+    
     {
-        $employees = Employees::all();
+        $employees = Employees::all();$employees = Employees::orderBy('created_at', 'asc')->get();
         return view('admin.employees.index',compact('employees'));
     }
 
@@ -28,22 +29,22 @@ class EmployeesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'position' => 'required'
-        ]);
-    
+        {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'nullable|email',
+                'position' => 'required|string',
+                'age' => 'required|numeric|min:18|max:65',
+                'sex' => 'required',
+                'address' => 'required|string',
+                'phone' => 'required|string',
+            ]);
 
-        Employees::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'position' => $request->position
-        ]);
-    
-        return redirect()->route('admin.employees.index');
-    }
+            Employees::create($request->all());
+
+            return redirect()->route('admin.employees.index')->with('success', 'Employee added successfully!');
+        }
+
 
     /**
      * Display the specified resource.
