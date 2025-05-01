@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employees;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
@@ -13,7 +13,7 @@ class EmployeesController extends Controller
     public function index()
     
     {
-        $employees = Employees::all();$employees = Employees::orderBy('created_at', 'asc')->get();
+        $employees = User::all();$employees = User::orderBy('created_at', 'asc')->get();
         return view('admin.employees.index',compact('employees'));
     }
 
@@ -40,7 +40,7 @@ class EmployeesController extends Controller
                 'phone' => 'required|string',
             ]);
 
-            Employees::create($request->all());
+            User::create($request->all());
 
             return redirect()->route('admin.employees.index')->with('success', 'Employee added successfully!');
         }
@@ -51,7 +51,7 @@ class EmployeesController extends Controller
      */
     public function show($id)
     {
-        $employees = Employees::findOrFail($id); 
+        $employees = User::findOrFail($id); 
         
         return view('admin.employees.show', compact('employees')); 
     }
@@ -61,7 +61,7 @@ class EmployeesController extends Controller
      */
     public function edit($id)
     {
-        $employees = Employees::findOrFail($id);
+        $employees = User::findOrFail($id);
         return view('admin.employees.edit', compact('employees'));
     }
 
@@ -72,13 +72,22 @@ class EmployeesController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'age' => 'required|numeric|min:18|max:65',
+            'address' => 'required',
+            'phone' => 'required',
             'email' => 'required',
             'position' => 'required'
         ]);
+
+        $request['sex'] = strtolower($request['sex']);
     
-        $employees = Employees::findOrFail($id);
+        $employees = User::findOrFail($id);
         $employees->update([
             'name' => $request->name,
+            'sex' => $request->sex,
+            'age' => $request->age,
+            'address' => $request->address,
+            'phone' => $request->phone,
             'email' => $request->email,
             'position' => $request->position
         ]);
@@ -91,7 +100,7 @@ class EmployeesController extends Controller
      */
     public function destroy($id)
     {
-            $employees = Employees::findOrFail($id);
+            $employees = User::findOrFail($id);
         $employees->delete();
 
         return redirect()->route('admin.employees.index');

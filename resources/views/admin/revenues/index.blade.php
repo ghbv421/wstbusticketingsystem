@@ -51,8 +51,12 @@
         <!-- Title Section -->
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-3xl font-semibold text-gray-800">Revenue Overview</h2>
+
+            <!-- Add Revenue Button -->
             <a href="{{route('revenue.create')}}"
-                class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">Add Revenue</a>
+               class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">
+                Add Revenue
+            </a>
         </div>
 
         <!-- Revenue Chart -->
@@ -61,7 +65,7 @@
         </div>
 
         <!-- Revenue Table -->
-        <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
             <table class="min-w-full table-auto border-collapse">
                 <thead class="bg-indigo-100">
                     <tr>
@@ -80,6 +84,15 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <!-- Action Buttons Section -->
+        <div class="flex justify-center gap-4">
+            <!-- Back Button -->
+            <a href="{{ route('adminpage') }}" 
+               class="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300">
+                Back
+            </a>
         </div>
     </div>
 </body>

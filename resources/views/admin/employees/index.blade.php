@@ -74,14 +74,24 @@
                 </div>
             @endif
 
-            <!-- Add Button -->
-            <div class="text-center">
-                <a href="{{ route('admin.employees.create') }}" 
-                   class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
-                    Add Employee
-                </a>
+            <!-- Add and Back Buttons -->
+            <div class="flex justify-between mt-6">
+                <!-- Add Employee Button -->
+                <div class="text-center">
+                    <a href="{{ route('admin.employees.create') }}" 
+                       class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition">
+                        Add Employee
+                    </a>
+                </div>
+                
+                <!-- Back Button -->
+                <div class="text-center">
+                    <a href="{{ route('adminpage') }}" 
+                       class="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300">
+                        Back
+                    </a>
+                </div>
             </div>
-            
         </div>
     </div>
 

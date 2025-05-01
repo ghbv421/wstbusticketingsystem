@@ -14,6 +14,10 @@
         
 
         <p class="text-lg text-gray-600"><strong>Email:</strong> {{ $employees->email }}</p>
+        <p class="text-lg text-gray-600 mb-4"><strong>Age:</strong> {{ $employees->age }}</p>
+        <p class="text-lg text-gray-600 mb-4"><strong>Sex:</strong> {{ $employees->sex }}</p>
+        <p class="text-lg text-gray-600 mb-4"><strong>Address:</strong> {{ $employees->address }}</p>
+        <p class="text-lg text-gray-600 mb-4"><strong>Phone:</strong> {{ $employees->phone }}</p>
         <p class="text-lg text-gray-600 mb-4"><strong>Position:</strong> {{ $employees->position }}</p>
 
         <div class="flex justify-between space-x-4">

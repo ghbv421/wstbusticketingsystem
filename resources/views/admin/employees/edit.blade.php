@@ -37,9 +37,9 @@
           <label for="sex" class="block mb-1">SEX::</label>
           <select name="sex" required class="w-full px-2 py-1 border border-black bg-white focus:outline-none">
             <option value="">--</option>
-            <option value="Male" @if($employees->sex == 'Male') selected @endif>MALE</option>
-            <option value="Female" @if($employees->sex == 'Female') selected @endif>FEMALE</option>
-            <option value="Other" @if($employees->sex == 'Other') selected @endif>OTHER</option>
+            <option value="male" @if($employees->sex == 'male') selected @endif>MALE</option>
+            <option value="female" @if($employees->sex == 'female') selected @endif>FEMALE</option>
+            <option value="other" @if($employees->sex == 'other') selected @endif>OTHER</option>
           </select>
         </div>
       </div>
