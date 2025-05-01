@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DispatcherController;
 use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -12,9 +13,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
+/* Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard'); */
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -70,5 +71,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Conductor route
+Route::get('/terminal',[DispatcherController::class, 'index'])->name('terminal');
 
 
