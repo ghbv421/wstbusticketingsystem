@@ -51,6 +51,7 @@ class EmployeesController extends Controller
     public function show($id)
     {
         $employees = Employees::findOrFail($id); 
+        
         return view('admin.employees.show', compact('employees')); 
     }
 
