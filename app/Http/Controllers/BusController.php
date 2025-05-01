@@ -17,16 +17,22 @@ class BusController extends Controller
         return view('admin.bus.register');
     }
 
-    public function store(Request $request){
-        $data = $request->validate([
-            'bus_type' => 'required',
-            'description' => 'nullable'
-        ]);
+    public function store(Request $request)
+{
+    $data = $request->validate([
+        'bus_type' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'departure_time' => 'nullable|date_format:H:i',
+        'arrival_time' => 'nullable|date_format:H:i',
+        'driver' => 'nullable|string|max:255',
+        'conductor' => 'nullable|string|max:255',
+        'status' => 'nullable|string|max:255',
+    ]);
 
-        $newBus = Bus::create($data);
+    $newBus = Bus::create($data);
 
-        return redirect(route('admin.bus.index'));
-    }
+    return redirect(route('admin.bus.index'));
+}
 
     public function show($id)
     {

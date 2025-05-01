@@ -10,6 +10,11 @@ class Bus extends Model
 
     protected $fillable = [
         'bus_type',
-        'description'
+        'description',
+        'departure_time',
+        'arrival_time',
+        'driver',
+        'conductor',
+        'status'
     ];
 }
