@@ -62,11 +62,11 @@ Route::middleware(['auth'])->group(function () {
         }
 
         return view('admin.index'); 
-    });
+    })->name('adminpage');
 
     Route::get('/user', function () {
         return view('user.index'); 
-    });
+    })->name('userpage');
 
 });
 

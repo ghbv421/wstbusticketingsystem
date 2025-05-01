@@ -20,7 +20,12 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'position',
+        'age',
+        'sex',
+        'address',
+        'phone',
+        'password'
     ];
 
     /**
@@ -44,11 +49,6 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Dispatcher::class);
     }
 
 }
