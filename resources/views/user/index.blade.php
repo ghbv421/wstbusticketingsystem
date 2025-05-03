@@ -15,6 +15,39 @@
         <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">
             <h2 class="text-2xl font-semibold mb-4">Welcome, Conductor!</h2>
             <p class="mb-6 text-gray-600">Manage your bus routes, tickets, and schedules easily from here.</p>
+            <div>
+                <form action="{{ route('calculatedistance') }}" method="POST">
+                    @csrf
+            
+                    <label for="t1_id" class="block text-left mb-1 font-medium">Terminal 1:</label>
+                        <select name="t1_id" id="t1_id" required class="mb-4 w-full border border-gray-300 rounded-lg p-2">
+                            <option value="">Select Terminal 1</option>
+                            @foreach ($terminals as $terminal)
+                                <option value="{{ $terminal->id }}">{{ $terminal->name }}</option>
+                            @endforeach
+                        </select>
+
+                        <label for="t2_id" class="block text-left mb-1 font-medium">Terminal 2:</label>
+                        <select name="t2_id" id="t2_id" required class="mb-4 w-full border border-gray-300 rounded-lg p-2">
+                            <option value="">Select Terminal 2</option>
+                            @foreach ($terminals as $terminal)
+                                <option value="{{ $terminal->id }}">{{ $terminal->name }}</option>
+                            @endforeach
+                        </select>
+                        <br><br>
+            
+                    <input type="submit" value="Calculate Distance">
+                </form>
+            
+                <div>
+                    @if(isset($distance) && isset($t1name) && isset($t2name))
+                        <h1>Distance</h1>
+                        <p>Distance from {{ $t1name }} to {{ $t2name }}: {{ $distance }} km</p>
+                    @endif
+                </div>
+            </div>
+            
+
             <a href="{{ route('logout.welcome') }}" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition">
                 Log Out
             </a>

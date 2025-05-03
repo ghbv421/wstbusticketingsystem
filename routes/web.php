@@ -4,10 +4,13 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DispatcherController;
+use App\Http\Controllers\ConductorController;
 use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RevenueController;
+use App\Http\Controllers\TerminalController;
+use App\Models\Terminal;
 
 Route::get('/', function () {
     return view('welcome');
@@ -64,13 +67,19 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.index'); 
     })->name('adminpage');
 
-    Route::get('/user', function () {
-        return view('user.index'); 
-    })->name('userpage');
+    Route::get('/user', [ConductorController::class, 'showDistanceForm'])->name('userpage');
+
 
 });
 
+//terminal
+Route::get('/terminal', [TerminalController::class, 'index'])->name('terminal.index');
+
 //Conductor route
-Route::get('/terminal',[DispatcherController::class, 'index'])->name('terminal');
+Route::post('/user',[ConductorController::class, 'calculateDistance'])->name('calculatedistance');
+Route::get('/terminals/{id}/edit', [TerminalController::class, 'edit'])->name('terminals.edit');
+Route::delete('/terminals/{id}', [TerminalController::class, 'destroy'])->name('terminals.destroy');
+Route::get('/terminals/create', [TerminalController::class, 'create'])->name('terminals.create');
+Route::post('/terminals', [TerminalController::class, 'store'])->name('terminals.store');
 
 

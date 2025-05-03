@@ -84,7 +84,7 @@
             </a>
 
             <!-- Terminals -->
-            <a href="{{ route('terminal') }}"
+            <a href="{{ route('terminal.index') }}"
                 class="bg-white text-black border-2 border-red-600 px-10 py-6 rounded-xl text-2xl text-center hover:bg-red-500 shadow hover:scale-105 transform transition">
                 Terminals
             </a>

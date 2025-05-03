@@ -7,23 +7,48 @@
 </head>
 <body>
     <h1>Terminal</h1>
+    <a href=" {{ route('terminals.create') }} ">Add Terminal</a>
     <table>
         <thead>
             <tr>
-                <th>Bus ID</th>
-                <th>Driver Name</th>
-                <th>Conductor Name</th>
-                <th>Bus Type</th>
-                <th>From Terminal</th>
-                <th>To Terminal</th>
-                <th>Departure Time</th>
-                <th>Arrival Time</th>
-                <th>Total Passenger</th>
-                <th>Available Seat</th>
-                <th>Status</th>
+                <th>ID</th>
+                <th>Terminal</th>
+                <th>Capacity</th>
+                <th>Contact</th>
+                <th>Latitute</th>
+                <th>Longitude</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Country</th>
                 <th>Action</th>
             </tr>
         </thead>
+        <tbody>
+            @foreach ($terminals as $terminal )
+                <tr>
+                    <td>{{ $terminal->id }}</td>
+                    <td>{{ $terminal->terminal }}</td>
+                    <td>{{ $terminal->capacity }}</td>
+                    <td>{{ $terminal->contact }}</td>
+                    <td>{{ $terminal->longitude }}</td>
+                    <td>{{ $terminal->latitude }}</td>
+                    <td>{{ $terminal->address }}</td>
+                    <td>{{ $terminal->city }}</td>
+                    <td>{{ $terminal->state }}</td>
+                    <td>{{ $terminal->country }}</td>
+                    <td>
+                        <a href=" {{ route('terminals.edit', $terminal->id) }} ">Edit</a>
+                        <form action=" {{ route('terminals.destroy', $terminal->id) }} " method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                
+            @endforeach
+        </tbody>
         <tbody>
             
                 <tr>
