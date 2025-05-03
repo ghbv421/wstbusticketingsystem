@@ -36,8 +36,8 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 //BUS
 
 Route::get('admin/bus', [BusController::class, 'index'])->name('admin.bus.index');
-Route::get('admin/bus/register', [BusController::class, 'register'])->name('admin.bus.register'); 
-Route::post('admin/bus', [BusController::class, 'store'])->name('admin.bus.store'); 
+Route::get('admin/bus/register', [BusController::class, 'register'])->name('admin.bus.register');
+Route::post('admin/bus', [BusController::class, 'store'])->name('admin.bus.store');
 Route::get('admin/bus/{id}', [BusController::class, 'show'])->name('admin.bus.show');
 Route::delete('admin/bus/{id}', [BusController::class, 'destroy'])->name('admin.bus.destroy');
 
@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function () {
             abort(403); // forbidden
         }
 
-        return view('admin.index'); 
+        return view('admin.index');
     })->name('adminpage');
 
     Route::get('/user', [ConductorController::class, 'showDistanceForm'])->name('userpage');
@@ -74,6 +74,8 @@ Route::middleware(['auth'])->group(function () {
 
 //terminal
 Route::get('/terminal', [TerminalController::class, 'index'])->name('terminal.index');
+Route::get('/admin/terminal', [TerminalController::class, 'index'])->name('admin.terminal.index');
+
 
 //Conductor route
 Route::post('/user',[ConductorController::class, 'calculateDistance'])->name('calculatedistance');
