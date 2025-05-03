@@ -11,10 +11,12 @@ class EmployeesController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    
+
     {
         $employees = User::all();$employees = User::orderBy('created_at', 'asc')->get();
+
         return view('admin.employees.index',compact('employees'));
+
     }
 
     /**
@@ -51,9 +53,9 @@ class EmployeesController extends Controller
      */
     public function show($id)
     {
-        $employees = User::findOrFail($id); 
-        
-        return view('admin.employees.show', compact('employees')); 
+        $employees = User::findOrFail($id);
+
+        return view('admin.employees.show', compact('employees'));
     }
 
     /**
@@ -80,7 +82,7 @@ class EmployeesController extends Controller
         ]);
 
         $request['sex'] = strtolower($request['sex']);
-    
+
         $employees = User::findOrFail($id);
         $employees->update([
             'name' => $request->name,
@@ -91,7 +93,7 @@ class EmployeesController extends Controller
             'email' => $request->email,
             'position' => $request->position
         ]);
-    
+
         return redirect()->route('admin.employees.index');
     }
 
