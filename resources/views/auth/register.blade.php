@@ -32,11 +32,15 @@
             {{-- Sex --}}
             <div>
                 <x-input-label for="sex" :value="__('Sex')" />
-                <x-text-input id="sex" name="sex" type="text"
-                              class="block mt-1 w-full border-2 border-dark-red"
-                              :value="old('sex')" required autocomplete="sex" />
+                <select id="sex" name="sex" class="block mt-1 w-full border-2 border-dark-red" required>
+                    <option value="" disabled selected>Select your sex</option>
+                    <option value="Male" {{ old('sex') == 'Male' ? 'selected' : '' }}>Male</option>
+                    <option value="Female" {{ old('sex') == 'Female' ? 'selected' : '' }}>Female</option>
+                    <option value="Other" {{ old('sex') == 'Other' ? 'selected' : '' }}>Other</option>
+                </select>
                 <x-input-error :messages="$errors->get('sex')" class="mt-2" />
             </div>
+
 
             {{-- Address --}}
             <div>

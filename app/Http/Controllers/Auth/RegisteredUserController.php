@@ -28,28 +28,42 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'sex' => ['required'],
+        'age' => ['required'],
+        'address' => ['required'],
+        'phone' => ['required'],
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'position' => $request->positon,
-            'age' => $request->age,
-            'sex' => $request->sex,
-            'address' => $request->address,
-            'phone' => $request->phone,
-        ]);
+    // Create user with position set to null by default
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'position' => null, // Position is set to null initially
+        'age' => $request->age,
+        'sex' => strtolower($request->sex), // Store sex as lowercase
+        'address' => $request->address,
+        'phone' => $request->phone,
+    ]);
 
-        event(new Registered($user));
+    // Event to indicate user registration
+    event(new Registered($user));
 
-        Auth::login($user);
+    // Login the user
+    Auth::login($user);
 
-        return redirect(route('adminpage', absolute: false));
+    // Check if position is null, redirect to 'wait' page
+    if ($user->position === null) {
+        return redirect()->route('wait'); // Redirect to 'wait' page if position is null
     }
+
+    // If position is set, redirect based on the position (can still use the admin page or wherever needed)
+    return redirect()->route('adminpage');
+}
+
 }

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\TerminalController;
+use App\Http\Controllers\UndefinedUserController;
 use App\Models\Terminal;
 
 Route::get('/', function () {
@@ -61,18 +62,9 @@ Route::post('/revenue/store', [RevenueController::class, 'store'])->name('revenu
 
 //Login Auth
 Route::middleware(['auth'])->group(function () {
-
-    Route::get('/admin', function () {
-        if (!in_array(Auth::id(), [1, 2])) {
-            abort(403); // forbidden
-        }
-
-        return view('admin.index');
-    })->name('adminpage');
-
-    Route::get('/user', [ConductorController::class, 'showDistanceForm'])->name('userpage');
-
-
+    Route::get('/admin', [AdminController::class, 'index'])->name('adminpage');
+    Route::get('/user', [ConductorController::class, 'index'])->name('conductorpage');
+    Route::get('/dispatcher', [DispatcherController::class, 'index'])->name('dispatcherpage');
 });
 
 //terminal
@@ -81,10 +73,37 @@ Route::get('/admin/terminal', [TerminalController::class, 'index'])->name('admin
 
 
 //Conductor route
-Route::post('/user',[ConductorController::class, 'calculateDistance'])->name('calculatedistance');
+/* Route::post('/user',[ConductorController::class, 'calculateDistance'])->name('calculatedistance'); */
 Route::get('/terminals/{id}/edit', [TerminalController::class, 'edit'])->name('terminals.edit');
 Route::delete('/terminals/{id}', [TerminalController::class, 'destroy'])->name('terminals.destroy');
 Route::get('/terminals/create', [TerminalController::class, 'create'])->name('terminals.create');
 Route::post('/terminals', [TerminalController::class, 'store'])->name('terminals.store');
+
+//wait
+Route::get('/wait',[UndefinedUserController:: class, 'index'])->name('wait');
+
+use App\Http\Middleware\CheckPosition;
+
+Route::middleware([CheckPosition::class])->group(function () {
+    Route::get('/admin', function () {
+        if (Auth::user()->position !== 'Admin') {
+            abort(403, 'Unauthorized');
+        }
+
+        return view('admin.index');
+    })->name('adminpage');
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/user', function () {
+            if (Auth::user()->position !== 'Conductor') {
+                abort(403, 'Unauthorized');
+            }
+    
+            // Manually call the controller method
+            return app(ConductorController::class)->index();
+        })->name('conductorpage');
+    });
+});
+
 
 

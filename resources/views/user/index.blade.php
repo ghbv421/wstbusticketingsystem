@@ -16,7 +16,7 @@
             <h2 class="text-2xl font-semibold mb-4">Welcome, Conductor!</h2>
             <p class="mb-6 text-gray-600">Manage your bus routes, tickets, and schedules easily from here.</p>
             <div>
-                <form action="{{ route('calculatedistance') }}" method="POST">
+                <form action="{{ route('conductorpage') }}" method="POST">
                     @csrf
             
                     <label for="t1_id" class="block text-left mb-1 font-medium">Terminal 1:</label>
