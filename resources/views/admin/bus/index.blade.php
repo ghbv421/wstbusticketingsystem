@@ -53,6 +53,7 @@
                         <th class="px-4 py-3 border border-gray-400">Driver</th>
                         <th class="px-4 py-3 border border-gray-400">Conductor</th>
                         <th class="px-4 py-3 border border-gray-400">Status</th>
+                        <th class="px-4 py-3 border border-gray-400">Actions</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-800">
@@ -65,6 +66,10 @@
                             <td class="px-4 py-2 border border-gray-400">{{ $Bus->driver ?? 'SELECT' }}</td>
                             <td class="px-4 py-2 border border-gray-400">{{ $Bus->conductor ?? 'SELECT' }}</td>
                             <td class="px-4 py-2 border border-gray-400">{{ $Bus->status ?? 'SELECT' }}</td>
+                            <td class="px-4 py-2 border border-gray-400">
+                                <a href="{{ route('admin.bus.edit', $Bus->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ route('admin.bus.destroy', $Bus->id) }}" class="btn btn-primary">Delete</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

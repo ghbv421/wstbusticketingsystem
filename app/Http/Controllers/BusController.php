@@ -43,13 +43,17 @@ class BusController extends Controller
 
     public function edit($id)
     {
-        //
+        $bus = Bus::findOrFail($id);
+        return view('admin.bus.edit', compact('bus'));
     }
-
+    
     public function update(Request $request, $id)
     {
-        //
+        $bus = Bus::findOrFail($id);
+        $bus->update($request->all());
+        return redirect()->route('admin.bus.index')->with('success', 'Bus updated successfully.');
     }
+    
 
     public function destroy($id)
     {

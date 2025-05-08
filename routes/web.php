@@ -40,6 +40,9 @@ Route::get('admin/bus/register', [BusController::class, 'register'])->name('admi
 Route::post('admin/bus', [BusController::class, 'store'])->name('admin.bus.store');
 Route::get('admin/bus/{id}', [BusController::class, 'show'])->name('admin.bus.show');
 Route::delete('admin/bus/{id}', [BusController::class, 'destroy'])->name('admin.bus.destroy');
+Route::get('/buses/{id}/edit', [BusController::class, 'edit'])->name('admin.bus.edit');
+Route::put('/buses/{id}', [BusController::class, 'update'])->name('admin.bus.update');
+
 
 //Employee
 Route::get('admin/employees', [EmployeesController::class, 'index'])->name('admin.employees.index');
