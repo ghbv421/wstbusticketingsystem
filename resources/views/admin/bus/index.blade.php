@@ -22,7 +22,7 @@
         <!-- Bus Cards Section - Filter Controls -->
         <div class="flex justify-center gap-6 mb-10 flex-wrap" id="bus-filters">
             <div class="text-center bg-white p-4 rounded-lg shadow-md cursor-pointer filter-item active-filter" data-type="all">
-                <img src="{{ asset('images/rural.png') }}" alt="All Buses" class="w-60 h-36 object-cover rounded-lg shadow-md">
+                <img src="{{ asset('images/all.png') }}" alt="All Buses" class="w-60 h-36 object-cover rounded-lg shadow-md">
                 <button class="mt-2 px-6 py-2 bg-blue-500 text-white font-serif border border-blue-500 rounded">
                     All Buses
                 </button>
@@ -64,38 +64,39 @@
                     </tr>
                 </thead>
                 <tbody class="text-gray-800" id="bus-table-body">
-                    @foreach ($Buses as $Bus)
-                        <tr class="hover:bg-gray-100 transition bus-row" data-type="{{ $Bus->bus_type ?? '' }}">
-                            <td class="px-4 py-2 border border-gray-400">{{ $Bus->bus_type ?? 'N/A' }}</td>
-                            <td class="px-4 py-2 border border-gray-400">{{ $Bus->capacity ?? 'N/A' }}</td>
-                            <td class="px-4 py-2 border border-gray-400">{{ $Bus->description ?? 'N/A' }}</td>
-                            <td class="px-4 py-2 border border-gray-400">{{ $Bus->departure_time ?? 'SELECT' }}</td>
-                            <td class="px-4 py-2 border border-gray-400">{{ $Bus->arrival_time ?? 'SELECT' }}</td>
-                            <td class="px-4 py-2 border border-gray-400">{{ $Bus->driver ?? 'SELECT' }}</td>
-                            <td class="px-4 py-2 border border-gray-400">{{ $Bus->conductor ?? 'SELECT' }}</td>
-                            <td class="px-4 py-2 border border-gray-400">
-                                <span class="px-2 py-1 rounded-full text-xs 
-                                    @if($Bus->status == 'Available') bg-green-100 text-green-800
-                                    @elseif($Bus->status == 'In Transit') bg-yellow-100 text-yellow-800
-                                    @elseif($Bus->status == 'Under Maintenance') bg-red-100 text-red-800
-                                    @else bg-gray-100 text-gray-800 @endif">
-                                    {{ $Bus->status ?? 'SELECT' }}
-                                </span>
-                            </td>
-                            <td class="px-4 py-2 border border-gray-400 flex gap-2 justify-center">
-                                <a href="{{ route('admin.bus.edit', $Bus->id) }}" 
-                                   class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">Edit</a>
-                                <form action="{{ route('admin.bus.destroy', $Bus->id) }}" method="POST" class="inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" 
-                                            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
-                                            onclick="return confirm('Are you sure you want to delete this bus?')">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
+                @foreach ($Buses as $Bus)
+                    <tr class="hover:bg-gray-100 transition bus-row" data-type="{{ $Bus->bus_type ?? '' }}">
+                        <td class="px-4 py-2 border border-gray-400">{{ $Bus->bus_type ?? 'N/A' }}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $Bus->capacity ?? 'N/A' }}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $Bus->description ?? 'N/A' }}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $Bus->departure_time ?? 'SELECT' }}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $Bus->arrival_time ?? 'SELECT' }}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $Bus->driver->name ?? 'SELECT' }}</td>
+                        <td class="px-4 py-2 border border-gray-400">{{ $Bus->conductor->name ?? 'SELECT' }}</td>
+                        <td class="px-4 py-2 border border-gray-400">
+                            <span class="px-2 py-1 rounded-full text-xs 
+                                @if($Bus->status == 'Available') bg-green-100 text-green-800
+                                @elseif($Bus->status == 'In Transit') bg-yellow-100 text-yellow-800
+                                @elseif($Bus->status == 'Under Maintenance') bg-red-100 text-red-800
+                                @else bg-gray-100 text-gray-800 @endif">
+                                {{ $Bus->status ?? 'SELECT' }}
+                            </span>
+                        </td>
+                        <td class="px-4 py-2 border border-gray-400 flex gap-2 justify-center">
+                            <a href="{{ route('admin.bus.edit', $Bus->id) }}" 
+                            class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">Edit</a>
+                            <form action="{{ route('admin.bus.destroy', $Bus->id) }}" method="POST" class="inline">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" 
+                                        class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                                        onclick="return confirm('Are you sure you want to delete this bus?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+
             </table>
         </div>
 

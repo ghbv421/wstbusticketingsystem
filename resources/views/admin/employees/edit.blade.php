@@ -58,6 +58,7 @@
         <label for="position" class="block mb-1">EMPLOYEE:</label>
         <select name="position" required class="w-full px-2 py-1 border border-black bg-white focus:outline-none">
           <option value="">SELECT</option>
+          <option value="Driver" @if($employees->position == 'Admin') selected @endif>ADMIN</option>
           <option value="Driver" @if($employees->position == 'Driver') selected @endif>DRIVER</option>
           <option value="Conductor" @if($employees->position == 'Conductor') selected @endif>CONDUCTOR</option>
           <option value="Dispatcher" @if($employees->position == 'Dispatcher') selected @endif>DISPATCHER</option>
