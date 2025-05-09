@@ -16,11 +16,18 @@
             @method('post')
 
             <!-- Bus Type -->
+            <label for="bus_type" class="block mb-1 font-medium">Bus Type</label>
+            <select name="bus_type" id="bus_type" class="form-select border border-gray-300 rounded-md p-2 w-full">
+                <option value="Rural">Rural</option>
+                <option value="Bachelor">Bachelor</option>
+                <option value="Bagong Lipunan">Bagong Lipunan</option>
+            </select>
+
+            <!-- Capacity -->
             <div>
-                <label for="bus_type" class="block text-gray-700 font-medium mb-1">Bus Type</label>
-                <input type="text" name="bus_type" placeholder="e.g. Rural Tour Bus"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required>
+                <label for="capacity" class="block text-gray-700 font-medium mb-1">Capacity</label>
+                <input type="number" name="capacity" placeholder="e.g. 50"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
             <!-- Description -->
@@ -38,33 +45,38 @@
             </div>
 
             <!-- Arrival Time -->
+
+            
             <div>
                 <label for="arrival_time" class="block text-gray-700 font-medium mb-1">Arrival Time</label>
                 <input type="time" name="arrival_time"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
-            <!-- Driver -->
+            <!--driver -->
+
             <div>
                 <label for="driver" class="block text-gray-700 font-medium mb-1">Driver</label>
-                <select name="driver"
+                <select id="driverDropdown"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">SELECT</option>
-                    <option value="Juan Dela Cruz">Juan Dela Cruz</option>
-                    <option value="Pedro Santos">Pedro Santos</option>
-                    <option value="Maria Lopez">Maria Lopez</option>
+                    @foreach($drivers as $driver)
+                        <option value="{{ route('drivers.show', $driver->id) }}">{{ $driver->name }}</option>
+                    @endforeach
                 </select>
             </div>
 
+
+
             <!-- Conductor -->
             <div>
-                <label for="conductor" class="block text-gray-700 font-medium mb-1">Conductor</label>
-                <select name="conductor"
+                <label for="driver" class="block text-gray-700 font-medium mb-1">Conductor</label>
+                <select id="driverDropdown"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">SELECT</option>
-                    <option value="Ana Reyes">Ana Reyes</option>
-                    <option value="Luis Gomez">Luis Gomez</option>
-                    <option value="Carlos Mendoza">Carlos Mendoza</option>
+                    @foreach($conductors as $conductor)
+                        <option value="{{ route('conductors.show', $conductor->id) }}">{{ $conductor->name }}</option>
+                    @endforeach
                 </select>
             </div>
 

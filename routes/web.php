@@ -39,6 +39,10 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('admin/bus', [BusController::class, 'index'])->name('admin.bus.index');
 Route::get('admin/bus/register', [BusController::class, 'register'])->name('admin.bus.register');
 Route::post('admin/bus', [BusController::class, 'store'])->name('admin.bus.store');
+
+Route::get('/drivers/{user}', [BusController::class, 'showForm'])->name('drivers.show');
+Route::get('/conductors/{user}', [BusController::class, 'showForm'])->name('conductors.show');
+
 Route::get('admin/bus/{id}', [BusController::class, 'show'])->name('admin.bus.show');
 Route::delete('admin/bus/{id}', [BusController::class, 'destroy'])->name('admin.bus.destroy');
 Route::get('/buses/{id}/edit', [BusController::class, 'edit'])->name('admin.bus.edit');
@@ -104,6 +108,8 @@ Route::middleware([CheckPosition::class])->group(function () {
         })->name('conductorpage');
     });
 });
+
+
 
 
 

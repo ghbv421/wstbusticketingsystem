@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bus;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -13,9 +14,15 @@ class BusController extends Controller
         return view('admin.bus.index', compact('Buses'));
     }
 
-    public function register(){
-        return view('admin.bus.register');
+    public function register(Request $request)
+    {
+        $drivers = User::where('position', 'Driver')->get();
+        
+        $conductors = User::where('position', 'Conductor')->get();
+    
+        return view('admin.bus.register', compact('drivers','conductors'));
     }
+    
 
     public function store(Request $request)
 {
@@ -63,4 +70,25 @@ class BusController extends Controller
 
         return redirect()->route('admin.bus.index')->with('success', 'Bus deleted successfully.');
     }
+
+    public function showForm($id)
+    {
+        $user = User::findOrFail($id);
+    
+        if ($user->position === 'Driver') {
+            return redirect()->route('admin.bus.register', ['id' => $user->id]);
+        }
+    
+        // Fix: fetch drivers before returning the view
+        $drivers = User::where('position', 'Driver')->get();
+
+        if ($user->position === 'Conductor') {
+            return redirect()->route('admin.bus.register', ['id' => $user->id]);
+        }
+    
+        // Fix: fetch drivers before returning the view
+        $drivers = User::where('position', 'Conductor')->get();
+    
+        return view('admin.bus.register', compact('conductors'));
+    }    
 }
