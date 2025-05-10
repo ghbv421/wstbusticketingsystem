@@ -10,7 +10,7 @@ class DispatcherController extends Controller
     // Display a listing of the employees
     public function index()
     {
-        return view('admin.terminal.index');
+        return view('dispatcher.index');
     }
 
     // Show the form for creating a new employee
