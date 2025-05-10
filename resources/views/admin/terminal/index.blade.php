@@ -47,14 +47,11 @@
                 <tr>
                     <th class="px-4 py-2">ID</th>
                     <th class="px-4 py-2">Terminal</th>
-                    <th class="px-4 py-2">Capacity</th>
                     <th class="px-4 py-2">Contact</th>
                     <th class="px-4 py-2">Latitude</th>
                     <th class="px-4 py-2">Longitude</th>
                     <th class="px-4 py-2">Address</th>
                     <th class="px-4 py-2">City</th>
-                    <th class="px-4 py-2">State</th>
-                    <th class="px-4 py-2">Country</th>
                     <th class="px-4 py-2">Actions</th>
                 </tr>
             </thead>

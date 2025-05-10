@@ -8,14 +8,11 @@ class Terminal extends Model
 {
     protected $fillable = [
         'name',
-        'capacity',
         'contact',
         'latitude',
         'longitude',
         'address',
         'city',
-        'state',
-        'country'
 
     ];
 }

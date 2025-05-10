@@ -14,14 +14,11 @@ return new class extends Migration
         Schema::create('terminals', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('capacity');
             $table->string('contact');
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->string('address');
             $table->string('city');
-            $table->string('state');
-            $table->string('country');
             $table->timestamps();
         });
     }

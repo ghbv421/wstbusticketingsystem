@@ -32,11 +32,6 @@
             </div>
 
             <div>
-                <label for="capacity" class="block font-semibold mb-1">Capacity</label>
-                <input type="number" id="capacity" name="capacity" class="w-full px-4 py-1 border rounded-lg" required>
-            </div>
-
-            <div>
                 <label for="contact" class="block font-semibold mb-1">Contact</label>
                 <input type="text" id="contact" name="contact" class="w-full px-4 py-1 border rounded-lg" required>
             </div>
@@ -59,16 +54,6 @@
             <div>
                 <label for="city" class="block font-semibold mb-1">City</label>
                 <input type="text" id="city" name="city" class="w-full px-4 py-1 border rounded-lg" required>
-            </div>
-
-            <div>
-                <label for="state" class="block font-semibold mb-1">State</label>
-                <input type="text" id="state" name="state" class="w-full px-4 py-1 border rounded-lg" required>
-            </div>
-
-            <div>
-                <label for="country" class="block font-semibold mb-1">Country</label>
-                <input type="text" id="country" name="country" class="w-full px-4 py-1 border rounded-lg" required>
             </div>
 
             <div class="flex justify-between items-center pt-6">
