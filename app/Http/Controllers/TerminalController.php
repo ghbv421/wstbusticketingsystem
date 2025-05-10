@@ -7,10 +7,23 @@ use Illuminate\Http\Request;
 
 class TerminalController extends Controller
 {
-    public function index(){
-        $terminals = Terminal::all();
-        return view ('admin.terminal.index', compact('terminals'));
+    public function index(Request $request)
+    {
+        $search = $request->input('search');
+
+        $terminals = Terminal::when($search, function ($query, $search) {
+            return $query->where('id', 'like', "%{$search}%")
+                        ->orWhere('terminal', 'like', "%{$search}%")
+                        ->orWhere('contact', 'like', "%{$search}%")
+                        ->orWhere('latitude', 'like', "%{$search}%")
+                        ->orWhere('longitude', 'like', "%{$search}%")
+                        ->orWhere('address', 'like', "%{$search}%")
+                        ->orWhere('city', 'like', "%{$search}%");
+        })->get();
+
+        return view('admin.terminal.index', compact('terminals'));
     }
+
 
     public function edit($id)
     {

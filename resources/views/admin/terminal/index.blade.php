@@ -26,10 +26,10 @@
                 <a class="px-4 py-2 rounded bg-white text-black shadow">
                     <p>Terminals</p>
                 </a>
-                <div class="relative">
-                    <input type="text" placeholder="Search"
+                <form method="GET" action="{{ route('terminal.index') }}">
+                    <input type="text" name="search" placeholder="Search" value="{{ request('search') }}"
                         class="pl-10 pr-4 py-2 rounded-full bg-white text-black w-72 sm:w-96 shadow focus:outline-none focus:ring-2 focus:ring-red-400" />
-                </div>
+                </form>
             </div>
             <div class="flex items-center gap-4 mt-2 sm:mt-0">
                 <a href="{{ route('terminals.create') }}" class="px-4 py-2 bg-white hover:bg-red-700 rounded text-black font-semibold">Add Terminal</a>
