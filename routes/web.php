@@ -45,8 +45,9 @@ Route::get('/conductors/{user}', [BusController::class, 'showForm'])->name('cond
 
 Route::get('admin/bus/{id}', [BusController::class, 'show'])->name('admin.bus.show');
 Route::delete('admin/bus/{id}', [BusController::class, 'destroy'])->name('admin.bus.destroy');
-Route::get('/buses/{id}/edit', [BusController::class, 'edit'])->name('admin.bus.edit');
-Route::put('/buses/{id}', [BusController::class, 'update'])->name('admin.bus.update');
+Route::get('admin/bus/{id}/edit', [BusController::class, 'edit'])->name('admin.bus.edit');
+Route::put('admin/bus/{id}', [BusController::class, 'update'])->name('admin.bus.update');
+
 
 
 //Employee

@@ -23,7 +23,7 @@
             </div>
 
             <!-- Capacity -->
-            <div>
+           <div>
                 <label for="capacity" class="block text-gray-700 font-medium mb-1">Capacity</label>
                 <input type="number" name="capacity" value="{{ old('capacity', $bus->capacity) }}"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -54,18 +54,30 @@
 
             <!-- Driver -->
             <div>
-                <label for="driver" class="block text-gray-700 font-medium mb-1">Driver</label>
-                <input type="text" name="driver" value="{{ old('driver', $bus->driver) }}"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter driver name">
+                <label for="driver_id" class="block text-gray-700 font-medium mb-1">Driver</label>
+                <select name="driver_id" id="driver_id"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">SELECT</option>
+                    @foreach($drivers as $driver)
+                        <option value="{{ $driver->id }}" {{ old('driver_id', $bus->driver_id) == $driver->id ? 'selected' : '' }}>
+                            {{ $driver->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <!-- Conductor -->
             <div>
-                <label for="conductor" class="block text-gray-700 font-medium mb-1">Conductor</label>
-                <input type="text" name="conductor" value="{{ old('conductor', $bus->conductor) }}"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter conductor name">
+                <label for="conductor_id" class="block text-gray-700 font-medium mb-1">Conductor</label>
+                <select name="conductor_id" id="conductor_id"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">SELECT</option>
+                    @foreach($conductors as $conductor)
+                        <option value="{{ $conductor->id }}" {{ old('conductor_id', $bus->conductor_id) == $conductor->id ? 'selected' : '' }}>
+                            {{ $conductor->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
 
             <!-- Status -->
@@ -90,6 +102,8 @@
             <!-- Back Button -->
             <div class="text-center mt-4">
                 <a href="{{ route('admin.bus.index') }}" class="text-red-600 hover:underline">← Back to Bus List</a>
-
+            </div>
+        </form>
+    </div>
 </body>
 </html>

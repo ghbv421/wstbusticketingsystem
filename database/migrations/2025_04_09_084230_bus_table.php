@@ -13,14 +13,22 @@ return new class extends Migration
     {
         Schema::create('bus_table', function (Blueprint $table) {
             $table->id();
-            $table->string("bus_type");
-            $table->text("description");
-            $table->time("departure_time")->nullable();
-            $table->time("arrival_time")->nullable();
-            $table->string("driver")->nullable()->default('SELECT');
-            $table->string("conductor")->nullable()->default('SELECT');
-            $table->string("status")->nullable()->default('SELECT');
+            $table->string('bus_type');
+            $table->integer('capacity')->nullable();
+            $table->text('description')->nullable();
+            $table->time('departure_time')->nullable();
+            $table->time('arrival_time')->nullable();
+
+            // Correct foreign key columns
+            $table->unsignedBigInteger('driver_id')->nullable();
+            $table->unsignedBigInteger('conductor_id')->nullable();
+
+            $table->string('status')->nullable()->default('SELECT');
             $table->timestamps();
+
+            // Add foreign key constraints
+            $table->foreign('driver_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('conductor_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 class BusController extends Controller
 {
     public function index(){
-        $Buses = Bus::all(); 
+// In your BusController
+    $Buses = Bus::with(['driver', 'conductor'])->get();
+    return view('admin.bus.index', compact('Buses'));
 
-        return view('admin.bus.index', compact('Buses'));
+
     }
 
     public function register(Request $request)
@@ -25,21 +27,23 @@ class BusController extends Controller
     
 
     public function store(Request $request)
-{
-    $data = $request->validate([
-        'bus_type' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'departure_time' => 'nullable|date_format:H:i',
-        'arrival_time' => 'nullable|date_format:H:i',
-        'driver' => 'nullable|string|max:255',
-        'conductor' => 'nullable|string|max:255',
-        'status' => 'nullable|string|max:255',
-    ]);
+    {
+        $data = $request->validate([
+            'bus_type' => 'required|string|max:255',
+            'capacity' => 'required|integer',
+            'description' => 'nullable|string',
+            'departure_time' => 'nullable|date_format:H:i',
+            'arrival_time' => 'nullable|date_format:H:i',
+            'driver_id' => 'required|exists:users,id',
+            'conductor_id' => 'required|exists:users,id',
+            'status' => 'nullable|string|max:255',
+        ]);
 
-    $newBus = Bus::create($data);
+        $newBus = Bus::create($data);
 
-    return redirect(route('admin.bus.index'));
-}
+        return redirect(route('admin.bus.index'));
+    }
+
 
     public function show($id)
     {
@@ -48,18 +52,43 @@ class BusController extends Controller
         return view('admin.bus.show', compact('bus'));
     }
 
+    // In your BusController
+
     public function edit($id)
     {
-        $bus = Bus::findOrFail($id);
-        return view('admin.bus.edit', compact('bus'));
+        $bus = Bus::findOrFail($id); // Find the bus by its ID
+        $drivers = User::where('position', 'Driver')->get(); // Assuming role-based filter for drivers
+        $conductors = User::where('position', 'Conductor')->get(); // Assuming role-based filter for conductors
+
+        return view('admin.bus.edit', compact('bus', 'drivers', 'conductors'));
     }
+
+
     
+    // In your BusController
+
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'bus_type' => 'required|string|max:255',
+            'capacity' => 'required|integer',
+            'description' => 'nullable|string',
+            'departure_time' => 'required|date_format:H:i',
+            'arrival_time' => 'required|date_format:H:i',
+            'driver_id' => 'nullable|exists:users,id',
+            'conductor_id' => 'nullable|exists:users,id',
+            'status' => 'required|in:Available,In Transit,Under Maintenance',
+        ]);
+
+        // Find the bus and update the fields
         $bus = Bus::findOrFail($id);
-        $bus->update($request->all());
+        $bus->update($validated);
+
+        // Redirect back to the bus list with a success message
         return redirect()->route('admin.bus.index')->with('success', 'Bus updated successfully.');
     }
+
+
     
 
     public function destroy($id)
@@ -91,4 +120,15 @@ class BusController extends Controller
     
         return view('admin.bus.register', compact('conductors'));
     }    
+
+    public function driver()
+    {
+        return $this->belongsTo(User::class, 'driver_id');
+    }
+
+    public function conductor()
+    {
+        return $this->belongsTo(User::class, 'conductor_id');
+    }
+
 }

@@ -10,11 +10,22 @@ class Bus extends Model
 
     protected $fillable = [
         'bus_type',
+        'capacity',
         'description',
         'departure_time',
         'arrival_time',
-        'driver',
-        'conductor',
+        'driver_id',
+        'conductor_id',
         'status'
     ];
+
+    public function driver()
+    {
+        return $this->belongsTo(User::class, 'driver_id');
+    }
+
+    public function conductor()
+    {
+        return $this->belongsTo(User::class, 'conductor_id');
+    }
 }

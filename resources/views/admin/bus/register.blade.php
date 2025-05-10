@@ -13,7 +13,6 @@
 
         <form action="{{ route('admin.bus.store') }}" method="POST" class="space-y-5">
             @csrf
-            @method('post')
 
             <!-- Bus Type -->
             <label for="bus_type" class="block mb-1 font-medium">Bus Type</label>
@@ -56,29 +55,31 @@
             <!--driver -->
 
             <div>
-                <label for="driver" class="block text-gray-700 font-medium mb-1">Driver</label>
-                <select id="driverDropdown"
+                <label for="driver_id" class="block text-gray-700 font-medium mb-1">Driver</label>
+                <select name="driver_id" id="driver_id"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">SELECT</option>
                     @foreach($drivers as $driver)
-                        <option value="{{ route('drivers.show', $driver->id) }}">{{ $driver->name }}</option>
+                        <option value="{{ $driver->id }}">{{ $driver->name }}</option>
                     @endforeach
                 </select>
             </div>
+
 
 
 
             <!-- Conductor -->
             <div>
-                <label for="driver" class="block text-gray-700 font-medium mb-1">Conductor</label>
-                <select id="driverDropdown"
+                <label for="conductor_id" class="block text-gray-700 font-medium mb-1">Conductor</label>
+                <select name="conductor_id" id="conductor_id"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">SELECT</option>
                     @foreach($conductors as $conductor)
-                        <option value="{{ route('conductors.show', $conductor->id) }}">{{ $conductor->name }}</option>
+                        <option value="{{ $conductor->id }}">{{ $conductor->name }}</option>
                     @endforeach
                 </select>
             </div>
+
 
             <!-- Status -->
             <div>
