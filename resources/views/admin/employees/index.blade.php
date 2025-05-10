@@ -50,6 +50,7 @@
                         <thead class="bg-gray-200 text-gray-700">
                             <tr>
                                 <th class="text-left px-4 py-2">Name</th>
+                                <th class="text-left px-4 py-2">Email</th>
                                 <th class="text-left px-4 py-2">Age</th>
                                 <th class="text-left px-4 py-2">Sex</th>
                                 <th class="text-left px-4 py-2">Address</th>
@@ -62,6 +63,7 @@
                                 <tr class="border-b hover:bg-gray-100 cursor-pointer"
                                     onclick="window.location='{{ route('admin.employees.show', $employee->id) }}'">
                                     <td class="px-4 py-2">{{ $employee->name }}</td>
+                                    <td class="px-4 py-2">{{ $employee->email }}</td>
                                     <td class="px-4 py-2">{{ $employee->age }}</td>
                                     <td class="px-4 py-2">{{ $employee->sex }}</td>
                                     <td class="px-4 py-2">{{ $employee->address }}</td>
