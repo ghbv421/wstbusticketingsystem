@@ -14,6 +14,43 @@
         <form action="{{ route('admin.bus.update', $bus->id) }}" method="POST" class="space-y-5">
             @csrf
             @method('PUT')
+            <!-- Bus Type -->
+            <div>
+                <label for="bus_type" class="block text-gray-700 font-medium mb-1">Bus Type</label>
+                <input type="text" name="bus_type" value="{{ old('bus_type', $bus->bus_type) }}"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter bus type">
+            </div>
+
+            <!-- Capacity -->
+            <div>
+                <label for="capacity" class="block text-gray-700 font-medium mb-1">Capacity</label>
+                <input type="number" name="capacity" value="{{ old('capacity', $bus->capacity) }}"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter capacity">
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label for="description" class="block text-gray-700 font-medium mb-1">Description</label>
+                <textarea name="description" rows="3"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter bus description">{{ old('description', $bus->description) }}</textarea>
+            </div>
+
+            <!-- Departure Time -->
+            <div>
+                <label for="departure_time" class="block text-gray-700 font-medium mb-1">Departure Time</label>
+                <input type="time" name="departure_time" value="{{ old('departure_time', $bus->departure_time) }}"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+
+            <!-- Arrival Time -->
+            <div>
+                <label for="arrival_time" class="block text-gray-700 font-medium mb-1">Arrival Time</label>
+                <input type="time" name="arrival_time" value="{{ old('arrival_time', $bus->arrival_time) }}"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
 
             <!-- Driver -->
             <div>
@@ -29,20 +66,6 @@
                 <input type="text" name="conductor" value="{{ old('conductor', $bus->conductor) }}"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Enter conductor name">
-            </div>
-
-            <!-- Departure Time -->
-            <div>
-                <label for="departure_time" class="block text-gray-700 font-medium mb-1">Departure Time</label>
-                <input type="time" name="departure_time" value="{{ old('departure_time', $bus->departure_time) }}"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <!-- Arrival Time -->
-            <div>
-                <label for="arrival_time" class="block text-gray-700 font-medium mb-1">Arrival Time</label>
-                <input type="time" name="arrival_time" value="{{ old('arrival_time', $bus->arrival_time) }}"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
             <!-- Status -->
