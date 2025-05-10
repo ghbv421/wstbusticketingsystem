@@ -101,8 +101,13 @@
                 Revenues
             </a>
         </div>
-
+<div class="pt-40 mt-40">
+    <footer class="bg-red-600 text-white text-center p-4 text-sm">
+        &copy; 2025 M3VALLE. All rights reserved.
+        </footer>
+</div>
     </div>
+
 
     <!-- Sidebar toggle script -->
     <script>
@@ -129,6 +134,7 @@
             }
         });
     </script>
+    
 
 </body>
 

@@ -1,23 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Employees;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-
+    public function index(Request $request)
     {
-        $employees = User::all();$employees = User::orderBy('created_at', 'asc')->get();
+        $search = $request->input('search');
 
-        return view('admin.employees.index',compact('employees'));
+        $employees = User::query()
+            ->when($search, function ($query, $search) {
+                return $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('age', 'like', "%{$search}%")
+                    ->orWhere('sex', 'like', "%{$search}%")
+                    ->orWhere('address', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%")
+                    ->orWhere('position', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy('created_at', 'asc')
+            ->paginate(10) // <-- paginates 10 results per page
+            ->withQueryString(); // <-- keeps the ?search= query in pagination links
 
+        return view('admin.employees.index', compact('employees'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
