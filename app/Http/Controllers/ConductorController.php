@@ -81,35 +81,49 @@ class ConductorController extends Controller
         return $deg * pi() / 180;
     }
 
-    public function calculateDistance(Request $request)
-    {
-        if (Auth::user()->position !== 'Conductor') {
-            abort(403, 'Unauthorized');
-        }
 
-        $terminals = Terminal::all();
-    
+        public function calculateDistance(Request $request)
+    {
+        // Validate inputs
+        $request->validate([
+            't1_id' => 'required|exists:terminals,id',
+            't2_id' => 'required|exists:terminals,id',
+        ]);
+
+        // Fetch terminals by their IDs
         $t1 = Terminal::find($request->input('t1_id'));
         $t2 = Terminal::find($request->input('t2_id'));
-    
-        if (!$t1 || !$t2) {
-            return view('user.index', [
-                'terminals' => $terminals,
-            ])->with('error', 'One or both terminals not found.');
-        }
-    
+
+        // Calculate the distance
         $distance = $this->calculateDistanceBetweenTerminals(
             $t1->latitude, $t1->longitude,
             $t2->latitude, $t2->longitude
         );
-    
+
+        // Calculate the price (Php 3.00 per kilometer)
+        $price = $distance * 3;
+
+        // Pass data to the view for the ticket preview
         return view('user.index', [
-            'distance' => $distance,
-            't1name' => $t1->name,
-            't2name' => $t2->name,
-            'terminals' => $terminals,
+            'terminals' => Terminal::all(),
+            't1name' => $t1->terminal,
+            't2name' => $t2->terminal,
+            'price' => $price,
         ]);
     }
+
+
+    public function printTicket(Request $request)
+    {
+        $t1name = $request->input('t1name');
+        $t2name = $request->input('t2name');
+        $price = $request->input('price');
+
+        return view('user.ticket', compact('t1name', 't2name', 'price'));
+    }
+
+
+
     
 
     public function showDistanceForm()

@@ -108,8 +108,11 @@ Route::middleware([CheckPosition::class])->group(function () {
             return app(ConductorController::class)->index();
         })->name('conductorpage');
     });
+
 });
 
+Route::post('/calculate-distance', [ConductorController::class, 'calculateDistance'])->name('calculate.distance');
+Route::get('/print-ticket', [ConductorController::class, 'printTicket'])->name('print.ticket');
 
 
 

@@ -1,3 +1,4 @@
+<!-- resources/views/conductor_dashboard.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,42 +16,51 @@
         <div class="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">
             <h2 class="text-2xl font-semibold mb-4">Welcome, Conductor!</h2>
             <p class="mb-6 text-gray-600">Manage your bus routes, tickets, and schedules easily from here.</p>
-            <div>
-                <form action="{{ route('conductorpage') }}" method="POST">
-                    @csrf
-            
-                    <label for="t1_id" class="block text-left mb-1 font-medium">Terminal 1:</label>
-                        <select name="t1_id" id="t1_id" required class="mb-4 w-full border border-gray-300 rounded-lg p-2">
-                            <option value="">Select Terminal 1</option>
-                            @foreach ($terminals as $terminal)
-                                <option value="{{ $terminal->id }}">{{ $terminal->name }}</option>
-                            @endforeach
-                        </select>
 
-                        <label for="t2_id" class="block text-left mb-1 font-medium">Terminal 2:</label>
-                        <select name="t2_id" id="t2_id" required class="mb-4 w-full border border-gray-300 rounded-lg p-2">
-                            <option value="">Select Terminal 2</option>
-                            @foreach ($terminals as $terminal)
-                                <option value="{{ $terminal->id }}">{{ $terminal->name }}</option>
-                            @endforeach
-                        </select>
-                        <br><br>
-            
-                    <input type="submit" value="Calculate Distance">
-                </form>
-            
-                <div>
-                    @if(isset($distance) && isset($t1name) && isset($t2name))
-                        <h1>Distance</h1>
-                        <p>Distance from {{ $t1name }} to {{ $t2name }}: {{ $distance }} km</p>
-                    @endif
+            <form action="{{ route('calculate.distance') }}" method="POST">
+                @csrf
+                <label for="t1_id" class="block text-left mb-1 font-medium">Terminal 1:</label>
+                <select name="t1_id" id="t1_id" required class="mb-4 w-full border border-gray-300 rounded-lg p-2">
+                    <option value="">From:</option>
+                    @foreach ($terminals as $terminal)
+                        <option value="{{ $terminal->id }}">{{ $terminal->terminal }}</option>
+                    @endforeach
+                </select>
+
+                <label for="t2_id" class="block text-left mb-1 font-medium">Terminal 2:</label>
+                <select name="t2_id" id="t2_id" required class="mb-4 w-full border border-gray-300 rounded-lg p-2">
+                    <option value="">To:</option>
+                    @foreach ($terminals as $terminal)
+                        <option value="{{ $terminal->id }}">{{ $terminal->terminal }}</option>
+                    @endforeach
+                </select>
+
+                <input type="submit" value="Calculate Distance" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 shadow-md cursor-pointer">
+            </form>
+
+            @if(isset($price) && isset($t1name) && isset($t2name) && $t1name !== '' && $t2name !== '')
+                <div id="ticketPreview" class="mt-6 bg-white p-4 rounded-lg shadow-md">
+                    <h2 class="text-2xl font-semibold text-red-600">Ticket Preview</h2>
+                    <p><strong>From:</strong> {{ $t1name }}</p>
+                    <p><strong>To:</strong> {{ $t2name }}</p>
+                    <p><strong>Price:</strong> Php {{ number_format($price, 2) }}</p>
+                    <p><strong>Discount:</strong> Php 0.00</p> <!-- Discount logic here if needed -->
+                    <p><strong>Total:</strong> Php {{ number_format($price, 2) }}</p>
+
+                    <!-- Button to print the ticket -->
+                    <a href="{{ route('print.ticket', ['t1name' => $t1name, 't2name' => $t2name, 'price' => $price]) }}" 
+                        class="mt-4 inline-block bg-green-600 text-white py-2 px-6 rounded-lg hover:bg-green-700 transition">
+                        Print Ticket
+                    </a>
                 </div>
-            </div>
+            @endif
             
-
-            <a href="{{ route('logout.welcome') }}" class="inline-block bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition">
-                Log Out
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-black font-medium py-2 px-4 rounded transition duration-200">
+                        Logout
+                    </button>
+            </form>
         </div>
     </main>
 
