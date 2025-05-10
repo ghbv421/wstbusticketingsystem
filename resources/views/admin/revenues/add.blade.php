@@ -19,8 +19,21 @@
 
             <!-- Terminal Name -->
             <div class="mb-6">
-                <label for="terminal_name" class="block text-sm font-medium text-gray-700">Terminal Name</label>
-                <input type="text" name="terminal_name" id="terminal_name" required
+                <label for="bus_id" class="block text-sm font-medium text-gray-700">Bus ID</label>
+                <input type="text" name="bus_id" id="terminal_name" required
+                    class="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+            <div class="mb-6">
+                <label for="conductor_id" class="block text-sm font-medium text-gray-700">Conductor</label>
+                <input type="text" name="conductor_id" id="terminal_name" required
+                    class="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+
+
+            <div class="mb-6">
+                <label for="driver_id" class="block text-sm font-medium text-gray-700">Driver</label>
+                <input type="text" name="driver_id" id="terminal_name" required
                     class="w-full mt-2 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
             </div>
 

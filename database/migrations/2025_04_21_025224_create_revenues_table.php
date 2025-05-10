@@ -13,10 +13,19 @@ return new class extends Migration
     {
         Schema::create('revenues', function (Blueprint $table) {
             $table->id();
-            $table->string('terminal_name');
+            
+            $table->unsignedBigInteger('bus_id');
+            $table->unsignedBigInteger('driver_id');
+            $table->unsignedBigInteger('conductor_id');
+
             $table->decimal('amount', 10, 2);
             $table->date('date');
             $table->timestamps();
+
+            // Foreign keys
+            $table->foreign('bus_id')->references('id')->on('bus_table')->onDelete('cascade');
+            $table->foreign('driver_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('conductor_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -28,3 +37,4 @@ return new class extends Migration
         Schema::dropIfExists('revenues');
     }
 };
+

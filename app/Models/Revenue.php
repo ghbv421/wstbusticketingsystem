@@ -10,7 +10,9 @@ class Revenue extends Model
     use HasFactory;
 
     protected $fillable = [
-        'terminal_name',
+        'bus_id',
+        'driver_id',
+        'conductor_id',
         'amount',
         'date'
     ];

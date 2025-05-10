@@ -69,7 +69,9 @@
             <table class="min-w-full table-auto border-collapse">
                 <thead class="bg-indigo-100">
                     <tr>
-                        <th class="p-3 text-left text-sm font-medium text-gray-700">Terminal</th>
+                        <th class="p-3 text-left text-sm font-medium text-gray-700">Bus ID</th>
+                        <th class="p-3 text-left text-sm font-medium text-gray-700">Driver</th>
+                        <th class="p-3 text-left text-sm font-medium text-gray-700">Conductor</th>
                         <th class="p-3 text-left text-sm font-medium text-gray-700">Amount (₱)</th>
                         <th class="p-3 text-left text-sm font-medium text-gray-700">Date</th>
                     </tr>
@@ -77,7 +79,9 @@
                 <tbody>
                     @foreach($revenues as $revenue)
                     <tr class="border-t hover:bg-indigo-50 transition duration-200">
-                        <td class="p-3 text-sm text-gray-700">{{ $revenue->terminal_name }}</td>
+                        <td class="p-3 text-sm text-gray-700">{{ $revenue->bus_id }}</td>
+                        <td class="p-3 text-sm text-gray-700">{{ $revenue->driver }}</td>
+                        <td class="p-3 text-sm text-gray-700">{{ $revenue->conductor }}</td>
                         <td class="p-3 text-sm text-gray-700">₱{{ number_format($revenue->amount, 2) }}</td>
                         <td class="p-3 text-sm text-gray-700">{{ $revenue->date }}</td>
                     </tr>
