@@ -56,17 +56,14 @@ class BusController extends Controller
 
     public function edit($id)
     {
-        $bus = Bus::findOrFail($id); // Find the bus by its ID
-        $drivers = User::where('position', 'Driver')->get(); // Assuming role-based filter for drivers
-        $conductors = User::where('position', 'Conductor')->get(); // Assuming role-based filter for conductors
+        $bus = Bus::findOrFail($id);
+        $drivers = User::where('position', 'Driver')->get();
+        $conductors = User::where('position', 'Conductor')->get();
 
         return view('admin.bus.edit', compact('bus', 'drivers', 'conductors'));
     }
 
-
-    
-    // In your BusController
-
+    // Handle update form submission
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -75,16 +72,14 @@ class BusController extends Controller
             'description' => 'nullable|string',
             'departure_time' => 'required|date_format:H:i',
             'arrival_time' => 'required|date_format:H:i',
-            'driver_id' => 'nullable|exists:users,id',
-            'conductor_id' => 'nullable|exists:users,id',
+            'driver_id' => 'required|exists:users,id',
+            'conductor_id' => 'required|exists:users,id',
             'status' => 'required|in:Available,In Transit,Under Maintenance',
         ]);
 
-        // Find the bus and update the fields
         $bus = Bus::findOrFail($id);
         $bus->update($validated);
 
-        // Redirect back to the bus list with a success message
         return redirect()->route('admin.bus.index')->with('success', 'Bus updated successfully.');
     }
 

@@ -22,7 +22,7 @@ class TerminalController extends Controller
         })->get();
 
         return view('admin.terminal.index', compact('terminals'));
-    }
+    } 
 
 
     public function edit($id)
@@ -47,4 +47,12 @@ class TerminalController extends Controller
         Terminal::create($request->all());
         return redirect()->route('terminal.index');
     }
+    public function update(Request $request, $id)
+    {
+        $terminal = Terminal::findOrFail($id);
+        $terminal->update($request->all());
+
+        return redirect()->route('terminal.index')->with('success', 'Terminal updated successfully.');
+    }
+
 }

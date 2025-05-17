@@ -35,18 +35,14 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 
 //BUS
-
 Route::get('admin/bus', [BusController::class, 'index'])->name('admin.bus.index');
 Route::get('admin/bus/register', [BusController::class, 'register'])->name('admin.bus.register');
-Route::post('admin/bus', [BusController::class, 'store'])->name('admin.bus.store');
-
-Route::get('/drivers/{user}', [BusController::class, 'showForm'])->name('drivers.show');
-Route::get('/conductors/{user}', [BusController::class, 'showForm'])->name('conductors.show');
-
+Route::post('admin/bus/store', [BusController::class, 'store'])->name('admin.bus.store');
 Route::get('admin/bus/{id}', [BusController::class, 'show'])->name('admin.bus.show');
-Route::delete('admin/bus/{id}', [BusController::class, 'destroy'])->name('admin.bus.destroy');
 Route::get('admin/bus/{id}/edit', [BusController::class, 'edit'])->name('admin.bus.edit');
 Route::put('admin/bus/{id}', [BusController::class, 'update'])->name('admin.bus.update');
+Route::delete('admin/bus/{id}', [BusController::class, 'destroy'])->name('admin.bus.destroy');
+
 
 
 
@@ -80,9 +76,12 @@ Route::get('/admin/terminal', [TerminalController::class, 'index'])->name('admin
 //Conductor route
 /* Route::post('/user',[ConductorController::class, 'calculateDistance'])->name('calculatedistance'); */
 Route::get('/terminals/{id}/edit', [TerminalController::class, 'edit'])->name('terminals.edit');
+Route::put('/terminals/{id}', [TerminalController::class, 'update'])->name('terminals.update');
 Route::delete('/terminals/{id}', [TerminalController::class, 'destroy'])->name('terminals.destroy');
 Route::get('/terminals/create', [TerminalController::class, 'create'])->name('terminals.create');
 Route::post('/terminals', [TerminalController::class, 'store'])->name('terminals.store');
+
+
 
 //wait
 Route::get('/wait',[UndefinedUserController:: class, 'index'])->name('wait');

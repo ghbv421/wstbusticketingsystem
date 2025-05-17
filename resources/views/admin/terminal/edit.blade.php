@@ -20,7 +20,7 @@
     @endif
 
     <!-- Edit Terminal Form -->
-    <form action="{{ route('terminals.edit', $terminal->id) }}" method="POST">
+    <form action="{{ route('terminals.update', $terminal->id) }}" method="POST">
         @csrf
         @method('PUT')
 

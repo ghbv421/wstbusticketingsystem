@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,27 +14,48 @@
     <script>
         window.onload = function () {
             const ctx = document.getElementById('revenueChart').getContext('2d');
-            const revenueChart = new Chart(ctx, {
+            new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: {!! json_encode($revenues->pluck('terminal_name')) !!},
+                    labels: {!! json_encode($revenues->pluck('bus_id')) !!},
                     datasets: [{
                         label: 'Revenue (₱)',
                         data: {!! json_encode($revenues->pluck('amount')) !!},
-                        backgroundColor: 'rgba(59, 130, 246, 0.7)',
-                        borderColor: 'rgba(59, 130, 246, 1)',
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)', // Red-500
+                        borderColor: 'rgba(220, 38, 38, 1)',       // Red-600
                         borderWidth: 1,
-                        borderRadius: 5
+                        borderRadius: 6,
+                        hoverBackgroundColor: 'rgba(220, 38, 38, 0.8)'
                     }]
                 },
                 options: {
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#1f2937', // text-gray-800
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    },
                     scales: {
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                callback: function (value) {
-                                    return '₱' + value;
-                                }
+                                color: '#4b5563', // text-gray-600
+                                callback: value => '₱' + value
+                            },
+                            grid: {
+                                color: '#e5e7eb' // gray-200
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#4b5563'
+                            },
+                            grid: {
+                                color: '#f3f4f6'
                             }
                         }
                     }
@@ -43,62 +63,63 @@
             });
         };
     </script>
-
 </head>
 
-<body class="bg-gray-50 font-sans">
+<body class="bg-gray-100 font-sans antialiased leading-relaxed">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <!-- Title Section -->
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-3xl font-semibold text-gray-800">Revenue Overview</h2>
-
-            <!-- Add Revenue Button -->
-            <a href="{{route('revenue.create')}}"
-               class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">
-                Add Revenue
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 tracking-tight">📊 Revenue Overview</h1>
+            <a href="{{ route('revenue.create') }}"
+               class="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-semibold shadow">
+                ➕ Add Revenue
             </a>
         </div>
 
-        <!-- Revenue Chart -->
-        <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <!-- Chart -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg mb-10">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Monthly Revenue Chart</h2>
             <canvas id="revenueChart" class="w-full h-96"></canvas>
         </div>
 
-        <!-- Revenue Table -->
-        <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
-            <table class="min-w-full table-auto border-collapse">
-                <thead class="bg-indigo-100">
+        <!-- Table -->
+        <div class="bg-white p-6 rounded-2xl shadow-lg overflow-auto">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Revenue List</h2>
+            <table class="w-full table-auto border-collapse text-sm">
+                <thead class="bg-red-100 text-red-700 uppercase">
                     <tr>
-                        <th class="p-3 text-left text-sm font-medium text-gray-700">Bus ID</th>
-                        <th class="p-3 text-left text-sm font-medium text-gray-700">Driver</th>
-                        <th class="p-3 text-left text-sm font-medium text-gray-700">Conductor</th>
-                        <th class="p-3 text-left text-sm font-medium text-gray-700">Amount (₱)</th>
-                        <th class="p-3 text-left text-sm font-medium text-gray-700">Date</th>
+                        <th class="p-3 text-left font-bold">Bus ID</th>
+                        <th class="p-3 text-left font-bold">Driver</th>
+                        <th class="p-3 text-left font-bold">Conductor</th>
+                        <th class="p-3 text-left font-bold">Amount (₱)</th>
+                        <th class="p-3 text-left font-bold">Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($revenues as $revenue)
-                    <tr class="border-t hover:bg-indigo-50 transition duration-200">
-                        <td class="p-3 text-sm text-gray-700">{{ $revenue->bus_id }}</td>
-                        <td class="p-3 text-sm text-gray-700">{{ $revenue->driver }}</td>
-                        <td class="p-3 text-sm text-gray-700">{{ $revenue->conductor }}</td>
-                        <td class="p-3 text-sm text-gray-700">₱{{ number_format($revenue->amount, 2) }}</td>
-                        <td class="p-3 text-sm text-gray-700">{{ $revenue->date }}</td>
-                    </tr>
-                    @endforeach
+                    @forelse($revenues as $revenue)
+                        <tr class="border-t border-gray-200 hover:bg-red-50 transition">
+                            <td class="p-3 text-gray-700">{{ $revenue->bus_id }}</td>
+                            <td class="p-3 text-gray-700">{{ $revenue->driver->name ?? 'N/A' }}</td>
+                            <td class="p-3 text-gray-700">{{ $revenue->conductor->name ?? 'N/A' }}</td>
+                            <td class="p-3 text-gray-700 font-semibold">₱{{ number_format($revenue->amount, 2) }}</td>
+                            <td class="p-3 text-gray-700">{{ \Carbon\Carbon::parse($revenue->date)->format('M d, Y') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center p-4 text-gray-500">No revenue records found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
 
-        <!-- Action Buttons Section -->
-        <div class="flex justify-center gap-4">
-            <!-- Back Button -->
-            <a href="{{ route('adminpage') }}" 
-               class="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition duration-300">
-                Back
+        <!-- Back Button -->
+        <div class="mt-8 flex justify-center">
+            <a href="{{ route('adminpage') }}"
+               class="bg-gray-800 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition shadow-lg">
+                ⬅ Back to Admin Page
             </a>
         </div>
     </div>
 </body>
-
 </html>
