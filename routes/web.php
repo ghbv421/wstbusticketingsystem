@@ -61,6 +61,20 @@ Route::get('/admin/revenue', [RevenueController::class, 'index'])->name('revenue
 Route::get('/revenue/add', [RevenueController::class, 'create'])->name('revenue.create');
 Route::post('/revenue/store', [RevenueController::class, 'store'])->name('revenue.store');
 
+
+// Dispatcher
+
+Route::get('/dispatchers', [DispatcherController::class, 'index'])->name('dispatcher.index');
+Route::get('/dispatchers/create', [DispatcherController::class, 'create'])->name('dispatcher.create');
+Route::post('/dispatchers', [DispatcherController::class, 'store'])->name('dispatcher.store');
+Route::get('/dispatchers/{dispatcher}', [DispatcherController::class, 'show'])->name('dispatcher.show');
+Route::get('/dispatchers/{dispatcher}/edit', [DispatcherController::class, 'edit'])->name('dispatcher.edit');
+Route::put('/dispatchers/{dispatcher}', [DispatcherController::class, 'update'])->name('dispatcher.update');
+Route::delete('/dispatchers/{dispatcher}', [DispatcherController::class, 'destroy'])->name('dispatcher.destroy');
+
+
+
+
 //Login Auth
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('adminpage');

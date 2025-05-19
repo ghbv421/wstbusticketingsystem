@@ -2,50 +2,80 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dispatcher;
+use App\Models\User;
+use App\Models\Bus;
+use App\Models\Terminal;
 use Illuminate\Http\Request;
 
 class DispatcherController extends Controller
 {
-    
-    // Display a listing of the employees
     public function index()
     {
-        return view('dispatcher.index');
+        $dispatchers = Dispatcher::with(['driver', 'bus', 'fromTerminal', 'destinationTerminal'])->get();
+        return view('dispatcher.index', compact('dispatchers'));
     }
 
-    // Show the form for creating a new employee
     public function create()
     {
-        // Logic to show create employee form
+        $drivers = User::all();
+        $buses = Bus::all();
+        $terminals = Terminal::all();
+        return view('dispatcher.create', compact('drivers', 'buses', 'terminals'));
     }
 
-    // Store a newly created employee in storage
     public function store(Request $request)
+{
+    $validated = $request->validate([
+        'driver_id' => 'required|exists:users,id',
+        'bus_type' => 'required|string',
+        'from_terminal_id' => 'required|exists:terminals,id',
+        'destination_terminal_id' => 'required|exists:terminals,id',
+        'departure' => 'required|date',
+        'arrival' => 'required|date|after_or_equal:departure',
+        'status' => 'required|in:Scheduled,Departed,Arrived,Cancelled',
+    ]);
+
+    Dispatcher::create($validated);
+
+    return redirect()->route('dispatcher.index')->with('success', 'Dispatcher added successfully.');
+}
+
+    public function show(Dispatcher $dispatcher)
     {
-        // Logic to validate and store a new employee
+        $dispatcher->load(['driver', 'bus', 'fromTerminal', 'destinationTerminal']);
+        return view('dispatcher.show', compact('dispatcher'));
     }
 
-    // Display the specified employee
-    public function show($id)
+    public function edit(Dispatcher $dispatcher)
     {
-        // Logic to display a single employee details
+        $drivers = User::all();
+        $buses = Bus::all();
+        $terminals = Terminal::all();
+        return view('dispatcher.edit', compact('dispatcher', 'drivers', 'buses', 'terminals'));
     }
 
-    // Show the form for editing the specified employee
-    public function edit($id)
+    public function update(Request $request, Dispatcher $dispatcher)
     {
-        // Logic to show edit form for employee
+        $validated = $request->validate([
+            'driver_id' => 'required|exists:users,id',
+            'bus_id' => 'required|exists:bus_table,id',
+            'bus_type' => 'required|string',
+            'from_terminal_id' => 'required|exists:terminals,id',
+            'destination_terminal_id' => 'required|exists:terminals,id',
+            'departure' => 'required|date',
+            'arrival' => 'required|date|after_or_equal:departure',
+            'status' => 'required|in:Scheduled,Departed,Arrived,Cancelled',
+        ]);
+
+        $dispatcher->update($validated);
+
+        return redirect()->route('dispatcher.index')->with('success', 'Dispatcher updated successfully.');
     }
 
-    // Update the specified employee in storage
-    public function update(Request $request, $id)
+    public function destroy(Dispatcher $dispatcher)
     {
-        // Logic to validate and update employee details
-    }
-
-    // Remove the specified employee from storage
-    public function destroy($id)
-    {
-        // Logic to delete an employee
+        $dispatcher->delete();
+        return redirect()->route('dispatcher.index')->with('success', 'Dispatcher deleted successfully.');
     }
 }
