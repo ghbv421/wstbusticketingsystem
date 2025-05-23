@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('dispatchers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('driver_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('conductor_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('bus_id')->constrained('bus_table')->onDelete('cascade');
             
             $table->string('bus_type');
