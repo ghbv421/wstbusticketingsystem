@@ -10,15 +10,19 @@ return new class extends Migration
     {
         Schema::create('dispatchers', function (Blueprint $table) {
             $table->id();
+
             $table->foreignId('driver_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('bus_id')->constrained('bus_table')->onDelete('cascade');
-            $table->foreign('driver_id')->references('id')->on('users')->onDelete('set null');
+
             $table->string('bus_type');
+            $table->foreign('bus_type')->references('bus_type')->on('bus_table')->onDelete('cascade');
+
             $table->foreignId('from_terminal_id')->constrained('terminals')->onDelete('cascade');
             $table->foreignId('destination_terminal_id')->constrained('terminals')->onDelete('cascade');
+
             $table->dateTime('departure');
             $table->dateTime('arrival');
             $table->enum('status', ['Scheduled', 'Departed', 'Arrived', 'Cancelled'])->default('Scheduled');
+
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bus_table', function (Blueprint $table) {
             $table->id();
-            $table->string('bus_type');
+            $table->string('bus_type')->unique();
             $table->integer('capacity')->nullable();
             $table->text('description')->nullable();
             $table->time('departure_time')->nullable();

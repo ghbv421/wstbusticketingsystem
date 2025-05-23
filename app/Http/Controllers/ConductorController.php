@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bus;
+use App\Models\User;
 use App\Models\Terminal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -13,18 +14,23 @@ class ConductorController extends Controller
     public function index()
     {
         $user = Auth::user();
-    
+
         if (!$user) {
             return redirect()->route('login');
         }
-    
+
         // Ensure user is a Conductor
         if ($user->position !== 'Conductor') {
             abort(403, 'Unauthorized');
         }
-    
+
         $terminals = Terminal::all();
-        return view('user.index', compact('terminals'));
+        $buses = Bus::all();
+
+        // Get only drivers (assuming 'position' is used to identify roles)
+        $drivers = User::where('position', 'Driver')->get();
+
+        return view('user.index', compact('terminals', 'buses', 'drivers'));
     }
     
     

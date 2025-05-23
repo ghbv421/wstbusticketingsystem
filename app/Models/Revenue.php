@@ -16,4 +16,13 @@ class Revenue extends Model
         'amount',
         'date'
     ];
+
+    public function driver() {
+        return $this->belongsTo(User::class, 'driver_id');
+    }
+
+    public function conductor() {
+        return $this->belongsTo(User::class, 'conductor_id');
+    }
+
 }

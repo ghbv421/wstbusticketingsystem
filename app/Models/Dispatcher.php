@@ -10,6 +10,7 @@ class Dispatcher extends Model
 
     protected $fillable = [
         'driver_id',
+        'bus_id',
         'bus_type',
         'from_terminal_id',
         'destination_terminal_id',

@@ -47,7 +47,7 @@
                 </select>
             </div>
 
-            <div>
+ {{--            <div>
                 <label for="bus_id" class="block font-semibold mb-1">Bus</label>
                 <select id="bus_id" name="bus_id" class="w-full px-4 py-1 border rounded-lg" required>
                     @foreach ($buses as $bus)
@@ -57,7 +57,7 @@
                     @endforeach
                 </select>
             </div>
-
+ --}}
             <div>
                 <label for="bus_type" class="block font-semibold mb-1">Bus Type</label>
                 <input type="text" id="bus_type" name="bus_type" value="{{ $dispatcher->bus_type }}" class="w-full px-4 py-1 border rounded-lg" required>

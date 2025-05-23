@@ -128,5 +128,10 @@ Route::post('/calculate-distance', [ConductorController::class, 'calculateDistan
 Route::get('/print-ticket', [ConductorController::class, 'printTicket'])->name('print.ticket');
 
 
+//revenuesfrom condcutro
+Route::post('/revenue/store', [RevenueController::class, 'store'])->name('revenue.store');
+
+
+
 
 

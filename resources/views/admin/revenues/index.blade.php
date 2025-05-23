@@ -21,8 +21,8 @@
                     datasets: [{
                         label: 'Revenue (₱)',
                         data: {!! json_encode($revenues->pluck('amount')) !!},
-                        backgroundColor: 'rgba(239, 68, 68, 0.6)', // Red-500
-                        borderColor: 'rgba(220, 38, 38, 1)',       // Red-600
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                        borderColor: 'rgba(220, 38, 38, 1)',
                         borderWidth: 1,
                         borderRadius: 6,
                         hoverBackgroundColor: 'rgba(220, 38, 38, 0.8)'
@@ -32,7 +32,7 @@
                     plugins: {
                         legend: {
                             labels: {
-                                color: '#1f2937', // text-gray-800
+                                color: '#1f2937',
                                 font: {
                                     weight: 'bold'
                                 }
@@ -43,11 +43,11 @@
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                color: '#4b5563', // text-gray-600
+                                color: '#4b5563',
                                 callback: value => '₱' + value
                             },
                             grid: {
-                                color: '#e5e7eb' // gray-200
+                                color: '#e5e7eb'
                             }
                         },
                         x: {
@@ -68,12 +68,8 @@
 <body class="bg-gray-100 font-sans antialiased leading-relaxed">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <!-- Header -->
-        <div class="flex justify-between items-center mb-8">
+        <div class="mb-8">
             <h1 class="text-4xl font-bold text-gray-800 tracking-tight">📊 Revenue Overview</h1>
-            <a href="{{ route('revenue.create') }}"
-               class="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-semibold shadow">
-                ➕ Add Revenue
-            </a>
         </div>
 
         <!-- Chart -->

@@ -36,15 +36,24 @@
             </div>
 
             <div>
-                <label for="bus_type" class="block font-semibold mb-1">Bus_type</label>
-                <select id="bus_type" name="bus_type" class="w-full px-4 py-1 border rounded-lg" required>
+                <label for="bus_id" class="block font-semibold mb-1">Bus</label>
+                <select id="bus_id" name="bus_id" class="w-full px-4 py-1 border rounded-lg" required>
                     <option value="">Select Bus</option>
                     @foreach ($buses as $bus)
-                        <option value="{{ $bus->bus_type }}">{{ $bus->bus_name ?? $bus->bus_type }}</option>
+                        <option value="{{ $bus->id }}">{{ $bus->bus_name ?? $bus->bus_type }}</option>
+                    @endforeach
+                </select>
+            </div>  
+            
+            <div>
+                <label for="bus_type" class="block font-semibold mb-1">Bus Type</label>
+                <select id="bus_type" name="bus_type" class="w-full px-4 py-1 border rounded-lg" required>
+                    <option value="">Select Bus Type</option>
+                    @foreach ($busTypes as $type)
+                        <option value="{{ $type }}">{{ $type }}</option>
                     @endforeach
                 </select>
             </div>
-
 
             <div>
                 <label for="from_terminal_id" class="block font-semibold mb-1">From Terminal</label>

@@ -47,11 +47,19 @@
         {{ __('Log in') }}
     </x-primary-button>
 </div> 
+<div>
+    <p>
+        Don't have an account? <a href="{{ url('/register') }}" id="here">Register here</a>!
+    </p>
+</div>
 </form>
 
 <style>
     .border-dark-red {
         border-color: #8B0000;
+    }
+    #here{
+        color: blue;
     }
 </style>
 </x-guest-layout>
