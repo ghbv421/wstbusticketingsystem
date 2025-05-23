@@ -70,10 +70,6 @@
         <!-- Header -->
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-4xl font-bold text-gray-800 tracking-tight">📊 Revenue Overview</h1>
-            <a href="{{ route('revenue.create') }}"
-               class="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-lg font-semibold shadow">
-                ➕ Add Revenue
-            </a>
         </div>
 
         <!-- Chart -->

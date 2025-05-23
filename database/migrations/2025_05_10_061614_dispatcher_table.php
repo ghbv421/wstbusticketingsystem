@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('dispatchers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('driver_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('driver_id')->nullable()->constrained('users')->onDelete('set null');
             $table->foreignId('bus_id')->constrained('bus_table')->onDelete('cascade');
-            $table->foreign('driver_id')->references('id')->on('users')->onDelete('set null');
+            
             $table->string('bus_type');
             $table->foreignId('from_terminal_id')->constrained('terminals')->onDelete('cascade');
             $table->foreignId('destination_terminal_id')->constrained('terminals')->onDelete('cascade');
