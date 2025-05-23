@@ -11,24 +11,25 @@ return new class extends Migration
         Schema::create('dispatchers', function (Blueprint $table) {
             $table->id();
 
-            // Foreign key to users table for the driver
+            // Foreign keys to users table
             $table->foreignId('driver_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->foreignId('conductor_id')->nullable()->constrained('users')->onDelete('set null');
 
             // Foreign key to bus_table
             $table->foreignId('bus_id')->constrained('bus_table')->onDelete('cascade');
 
-            // Bus type as string (not referencing because it's a non-ID field)
+            // Bus type as a regular string (not a foreign key)
             $table->string('bus_type');
 
             // Foreign keys to terminals
             $table->foreignId('from_terminal_id')->constrained('terminals')->onDelete('cascade');
             $table->foreignId('destination_terminal_id')->constrained('terminals')->onDelete('cascade');
 
-            // Schedule info
+            // Schedule fields
             $table->dateTime('departure');
             $table->dateTime('arrival');
 
-            // Enum for status
+            // Status enum
             $table->enum('status', ['Scheduled', 'Departed', 'Arrived', 'Cancelled'])->default('Scheduled');
 
             $table->timestamps();
