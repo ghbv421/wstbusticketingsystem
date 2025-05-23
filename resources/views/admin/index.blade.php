@@ -57,22 +57,6 @@
                 <h1 class="text-xl font-semibold">Dashboard</h1>
             </div>
 
-            <div class="flex items-center gap-4">
-                <!-- Envelope Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-black" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m0 8V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2h14a2 2 0 002-2z" />
-                </svg>
-
-                <!-- Settings Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-black" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M11.25 3v2.25m1.5 0V3m-1.5 15.75V21m1.5 0v-2.25M4.219 4.219l1.593 1.593M18.188 18.188l1.593 1.593M2.25 12h2.25m15 0h2.25m-1.78-7.781l-1.593 1.593M6.813 18.188l-1.593 1.593" />
-                    <circle cx="12" cy="12" r="3" />
-                </svg>
-            </div>
         </header>
 
         <!-- Dashboard Buttons -->
