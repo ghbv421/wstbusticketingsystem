@@ -24,7 +24,7 @@
     <div class="w-full max-w-7xl flex flex-wrap justify-between items-center mb-6">
         <div class="flex items-center gap-2 flex-wrap">
             <a class="px-4 py-2 rounded bg-white text-black shadow">
-                <p>Dispatcher Terminal</p>
+                <p>Dispatcher Terminal  </p>
             </a>
             
             <form method="GET" action="{{ route('dispatcher.index') }}">

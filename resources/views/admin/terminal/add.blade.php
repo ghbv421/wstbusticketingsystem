@@ -4,63 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Terminal</title>
-    @vite('resources/css/app.css')
-    <style>
-        body {
-            background: url('{{ asset('images/bus2.jpg') }}') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black/60">
+<body class="bg-red-100 min-h-screen flex items-center justify-center">
 
-    <!-- Form Container with Background -->
-    <div class="bg-white backdrop-blur-md rounded-2xl shadow-2xl max-w-lg mx-auto p-6">
-        <h1 class="text-3xl font-bold text-center pt-8 px-6"></h1>
+    <div class="w-full max-w-lg bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-2xl font-bold mb-6 text-center text-blue-700">Add Terminal</h1>
 
         <form action="{{ route('terminals.store') }}" method="POST" class="space-y-5">
             @csrf
 
+            <!-- Terminal -->
             <div>
-                <label for="terminal" class="block font-semibold mb-1">Terminal</label>
-                <input type="text" id="terminal" name="terminal" class="w-full px-4 py-1 border rounded-lg" required>
+                <label for="terminal" class="block text-gray-700 font-medium mb-1">Terminal</label>
+                <input type="text" id="terminal" name="terminal"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       required>
             </div>
 
+            <!-- Contact -->
             <div>
-                <label for="contact" class="block font-semibold mb-1">Contact</label>
-                <input type="text" id="contact" name="contact" class="w-full px-4 py-1 border rounded-lg" required>
+                <label for="contact" class="block text-gray-700 font-medium mb-1">Contact</label>
+                <input type="text" id="contact" name="contact"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       required>
             </div>
 
+            <!-- Latitude -->
             <div>
-                <label for="latitude" class="block font-semibold mb-1">Latitude</label>
-                <input type="number" step="any" id="latitude" name="latitude" class="w-full px-4 py-1 border rounded-lg" required>
+                <label for="latitude" class="block text-gray-700 font-medium mb-1">Latitude</label>
+                <input type="number" step="any" id="latitude" name="latitude"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       required>
             </div>
 
+            <!-- Longitude -->
             <div>
-                <label for="longitude" class="block font-semibold mb-1">Longitude</label>
-                <input type="number" step="any" id="longitude" name="longitude" class="w-full px-4 py-1 border rounded-lg" required>
+                <label for="longitude" class="block text-gray-700 font-medium mb-1">Longitude</label>
+                <input type="number" step="any" id="longitude" name="longitude"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       required>
             </div>
 
+            <!-- Address -->
             <div>
-                <label for="address" class="block font-semibold mb-1">Address</label>
-                <input type="text" id="address" name="address" class="w-full px-4 py-1 border rounded-lg" required>
+                <label for="address" class="block text-gray-700 font-medium mb-1">Address</label>
+                <input type="text" id="address" name="address"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       required>
             </div>
 
+            <!-- City -->
             <div>
-                <label for="city" class="block font-semibold mb-1">City</label>
-                <input type="text" id="city" name="city" class="w-full px-4 py-1 border rounded-lg" required>
+                <label for="city" class="block text-gray-700 font-medium mb-1">City</label>
+                <input type="text" id="city" name="city"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       required>
             </div>
 
-            <div class="flex justify-between items-center pt-6">
-                <a href="{{ route('terminal.index') }}" class="text-red-600 hover:underline">← Back</a>
-                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-black px-6 py-2 rounded-lg">
-                    Save
-                </button>
+            <!-- Submit -->
+            <div>
+                <input type="submit" value="Save Terminal"
+                       class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition">
+            </div>
+
+            <!-- Back Button -->
+            <div class="text-center mt-4">
+                <a href="{{ route('terminal.index') }}" class="text-red-600 hover:underline">← Back to Terminal List</a>
             </div>
         </form>
     </div>
