@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Bus;
 use App\Models\User;
+use App\Models\Dispatcher;
+use App\Models\Revenue;
+use Carbon\Carbon;
 use App\Models\Terminal;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -119,12 +122,43 @@ class ConductorController extends Controller
     }
 
 
-    public function printTicket(Request $request)
+   public function printTicket(Request $request)
     {
         $t1name = $request->input('t1name');
         $t2name = $request->input('t2name');
         $price = $request->input('price');
+        $conductorId = Auth::id();
 
+        // Get the latest dispatcher with 'Scheduled' or 'Departed' status for the logged-in conductor
+        $dispatcher = Dispatcher::where('conductor_id', $conductorId)
+            ->whereIn('status', ['Scheduled', 'Departed'])
+            ->latest()
+            ->first();
+
+        if (!$dispatcher) {
+            return redirect()->back()->withErrors(['No active dispatcher found for this conductor.']);
+        }
+
+        // Check for existing revenue record (by dispatcher ID + date)
+        $existingRevenue = Revenue::where('dispatcher_id', $dispatcher->id)
+            ->whereDate('date', Carbon::today())
+            ->first();
+
+        if ($existingRevenue) {
+            $existingRevenue->amount += $price;
+            $existingRevenue->save();
+        } else {
+            Revenue::create([
+                'dispatcher_id' => $dispatcher->id,
+                'bus_id' => $dispatcher->bus_id,
+                'driver_id' => $dispatcher->driver_id,
+                'conductor_id' => $dispatcher->conductor_id,
+                'amount' => $price,
+                'date' => Carbon::today(),
+            ]);
+        }
+
+        // Show the printed ticket view
         return view('user.ticket', compact('t1name', 't2name', 'price'));
     }
 
@@ -137,4 +171,6 @@ class ConductorController extends Controller
         $terminals = Terminal::all();
         return view('user.index', compact('terminals'));
     }
+
+
 }

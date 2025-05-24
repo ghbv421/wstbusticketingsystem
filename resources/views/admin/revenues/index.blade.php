@@ -13,14 +13,26 @@
 
     <script>
         window.onload = function () {
+            const revenues = @json($revenues);
+            const drivers = @json($drivers);
+            const conductors = @json($conductors);
+
+            const labels = revenues.map(r => {
+                const driverName = drivers[r.driver_id] ?? 'Unknown Driver';
+                const conductorName = conductors[r.conductor_id] ?? 'Unknown Conductor';
+                return `Bus ${r.bus_id} - Driver: ${driverName} - Conductor: ${conductorName}`;
+            });
+
+            const data = revenues.map(r => r.total_amount);
+
             const ctx = document.getElementById('revenueChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: {!! json_encode($revenues->pluck('bus_id')) !!},
+                    labels: labels,
                     datasets: [{
                         label: 'Revenue (₱)',
-                        data: {!! json_encode($revenues->pluck('amount')) !!},
+                        data: data,
                         backgroundColor: 'rgba(239, 68, 68, 0.6)',
                         borderColor: 'rgba(220, 38, 38, 1)',
                         borderWidth: 1,
@@ -63,6 +75,7 @@
             });
         };
     </script>
+
 </head>
 
 <body class="bg-gray-100 font-sans antialiased leading-relaxed">
@@ -95,10 +108,10 @@
                     @forelse($revenues as $revenue)
                         <tr class="border-t border-gray-200 hover:bg-red-50 transition">
                             <td class="p-3 text-gray-700">{{ $revenue->bus_id }}</td>
-                            <td class="p-3 text-gray-700">{{ $revenue->driver->name ?? 'N/A' }}</td>
-                            <td class="p-3 text-gray-700">{{ $revenue->conductor->name ?? 'N/A' }}</td>
-                            <td class="p-3 text-gray-700 font-semibold">₱{{ number_format($revenue->amount, 2) }}</td>
-                            <td class="p-3 text-gray-700">{{ \Carbon\Carbon::parse($revenue->date)->format('M d, Y') }}</td>
+                            <td class="p-3 text-gray-700">{{ $drivers[$revenue->driver_id] ?? 'N/A' }}</td>
+                            <td class="p-3 text-gray-700">{{ $conductors[$revenue->conductor_id] ?? 'N/A' }}</td>
+                            <td class="p-3 text-gray-700 font-semibold">₱{{ number_format($revenue->total_amount, 2) }}</td>
+                            <td class="p-3 text-gray-700">{{ \Carbon\Carbon::parse($revenue->latest_date)->format('M d, Y') }}</td>
                         </tr>
                     @empty
                         <tr>

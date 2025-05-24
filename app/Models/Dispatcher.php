@@ -11,6 +11,7 @@ class Dispatcher extends Model
     protected $fillable = [
         'driver_id',
         'bus_id',
+        'conductor_id',
         'bus_type',
         'from_terminal_id',
         'destination_terminal_id',
@@ -44,6 +45,11 @@ class Dispatcher extends Model
     public function destinationTerminal()
     {
         return $this->belongsTo(Terminal::class, 'destination_terminal_id');
+    }
+
+    public function conductor()
+    {
+        return $this->belongsTo(User::class, 'conductor_id');
     }
 
 

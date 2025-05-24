@@ -26,6 +26,19 @@
                 </select>
             </div>
 
+            <!-- Conductor -->
+            <div>
+                <label for="conductor_id" class="block text-gray-700 font-medium mb-1">Conductor</label>
+                <select id="conductor_id" name="conductor_id"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="">Select Conductor</option>
+                    @foreach ($conductors as $conductor)
+                        <option value="{{ $conductor->id }}">{{ $conductor->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
             <!-- Bus -->
             <div>
                 <label for="bus_id" class="block text-gray-700 font-medium mb-1">Bus</label>

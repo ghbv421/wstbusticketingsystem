@@ -12,9 +12,28 @@ class RevenueController extends Controller
     // Show revenue graph & list
     public function index()
     {
-        $revenues = Revenue::with(['driver', 'conductor'])->get();
-        return view('admin.revenues.index', compact('revenues'));
+        // Group by bus_id, driver_id, conductor_id and sum the amount
+        $revenues = DB::table('revenues')
+        ->select(
+            'bus_id', 
+            'driver_id', 
+            'conductor_id', 
+            DB::raw('SUM(amount) as total_amount'),
+            DB::raw('MAX(date) as latest_date')  // get the latest date per group
+        )
+        ->groupBy('bus_id', 'driver_id', 'conductor_id')
+        ->get();
+
+
+        // Eager load related user data for drivers and conductors separately
+        $driverIds = $revenues->pluck('driver_id')->unique();
+        $conductorIds = $revenues->pluck('conductor_id')->unique();
+        $drivers = User::whereIn('id', $driverIds)->pluck('name', 'id');
+        $conductors = User::whereIn('id', $conductorIds)->pluck('name', 'id');
+
+        return view('admin.revenues.index', compact('revenues', 'drivers', 'conductors'));
     }
+
 
 
     // Show form to add revenue
@@ -46,5 +65,7 @@ class RevenueController extends Controller
 
         return redirect()->back()->with('success', 'Revenue recorded successfully!');
     }
+
+    
 
 }

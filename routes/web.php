@@ -119,7 +119,7 @@ Route::middleware([CheckPosition::class])->group(function () {
     
             // Manually call the controller method
             return app(ConductorController::class)->index();
-        })->name('conductorpage');
+        })->name('conductorpage'); 
     });
 
 });

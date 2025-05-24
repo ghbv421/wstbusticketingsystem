@@ -29,6 +29,19 @@
             </div>
 
             <div>
+                <label for="conductor_id" class="block text-gray-700 font-medium mb-1">Conductor</label>
+                <select id="conductor_id" name="conductor_id"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    @foreach ($conductors as $conductor)
+                        <option value="{{ $conductor->id }}" {{ $dispatcher->conductor_id == $conductor->id ? 'selected' : '' }}>
+                            {{ $conductor->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+
+            <div>
                 <label for="bus_id" class="block text-gray-700 font-medium mb-1">Bus</label>
                 <select id="bus_id" name="bus_id"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">

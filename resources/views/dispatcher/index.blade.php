@@ -53,6 +53,7 @@
                 <tr>
                     <th class="px-2 py-2 w-12 border border-gray-300">ID</th>
                     <th class="px-2 py-2 w-32 border border-gray-300">Driver</th>
+                    <th class="px-2 py-2 w-32 border border-gray-300">Conductor</th>
                     <th class="px-2 py-2 w-32 border border-gray-300">Bus Type</th>
                     <th class="px-2 py-2 w-32 border border-gray-300">From</th>
                     <th class="px-2 py-2 w-32 border border-gray-300">To</th>
@@ -67,6 +68,7 @@
                 <tr class="bg-white">
                     <td class="px-2 py-2 border border-gray-300">{{ $dispatcher->id }}</td>
                     <td class="px-2 py-2 border border-gray-300">{{ $dispatcher->driver->name ?? 'N/A' }}</td>
+                    <td class="px-2 py-2 border border-gray-300">{{ $dispatcher->conductor->name ?? 'N/A' }}</td>
                     <td class="px-2 py-2 border border-gray-300">{{ $dispatcher->bus_type }}</td>
                     <td class="px-2 py-2 border border-gray-300">{{ $dispatcher->fromTerminal->terminal ?? 'N/A' }}</td>
                     <td class="px-2 py-2 border border-gray-300">{{ $dispatcher->destinationTerminal->terminal ?? 'N/A' }}</td>
