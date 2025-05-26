@@ -17,8 +17,7 @@ class TerminalController extends Controller
                         ->orWhere('contact', 'like', "%{$search}%")
                         ->orWhere('latitude', 'like', "%{$search}%")
                         ->orWhere('longitude', 'like', "%{$search}%")
-                        ->orWhere('address', 'like', "%{$search}%")
-                        ->orWhere('city', 'like', "%{$search}%");
+                        ->orWhere('location', 'like', "%{$search}%");                      
         })->get();
 
         return view('admin.terminal.index', compact('terminals'));

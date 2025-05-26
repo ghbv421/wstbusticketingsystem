@@ -52,9 +52,8 @@
                         <th class="px-2 py-2 w-32 border border-gray-300">Contact</th>
                         <th class="px-2 py-2 w-32 border border-gray-300">Latitude</th>
                         <th class="px-2 py-2 w-32 border border-gray-300">Longitude</th>
-                        <th class="px-2 py-2 w-64 border border-gray-300">Address</th>
-                        <th class="px-2 py-2 w-32 border border-gray-300">City</th>
-                        <th class="px-2 py-2 w-32 border border-gray-300">Actions</th>
+                        <th class="px-2 py-2 w-64 border border-gray-300">Location</th>
+                        <th class="px-2 py-2 w-32 border border-gray-300">ActionS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,8 +64,7 @@
                         <td class="px-2 py-2 border border-gray-300 truncate">{{ $terminal->contact }}</td>
                         <td class="px-2 py-2 border border-gray-300 truncate">{{ $terminal->latitude }}</td>
                         <td class="px-2 py-2 border border-gray-300 truncate">{{ $terminal->longitude }}</td>
-                        <td class="px-2 py-2 border border-gray-300 truncate">{{ $terminal->address }}</td>
-                        <td class="px-2 py-2 border border-gray-300 truncate">{{ $terminal->city }}</td>
+                        <td class="px-2 py-2 border border-gray-300 truncate">{{ $terminal->location }}</td>
                         <td class="px-2 py-2 border border-gray-300">
                             <div class="flex flex-row justify-center items-center gap-2">
                                 <a href="{{ route('terminals.edit', $terminal->id) }}" class="px-3 py-1 bg-blue-600 text-black rounded hover:bg-blue-700">Edit</a>

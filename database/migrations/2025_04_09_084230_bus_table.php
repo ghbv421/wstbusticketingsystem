@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('bus_type')->unique();
             $table->integer('capacity')->nullable();
-            $table->text('description')->nullable();
             $table->time('departure_time')->nullable();
             $table->time('arrival_time')->nullable();
 

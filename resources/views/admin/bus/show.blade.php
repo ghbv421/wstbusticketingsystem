@@ -18,7 +18,6 @@
          
                 <h2 class="text-2xl font-semibold text-gray-700">{{ $bus->bus_type }}</h2>
              
-                <p class="text-lg text-gray-500 mt-2">{{ $bus->description }}</p>
             </div>
 
 

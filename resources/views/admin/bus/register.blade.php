@@ -29,13 +29,6 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
-            <!-- Description -->
-            <div>
-                <label for="description" class="block text-gray-700 font-medium mb-1">Description</label>
-                <input type="text" name="description" placeholder="e.g. Red with stripes"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
             <!-- Departure Time -->
             <div>
                 <label for="departure_time" class="block text-gray-700 font-medium mb-1">Departure Time</label>

@@ -54,7 +54,6 @@
                     <tr>
                         <th class="px-4 py-3 border border-gray-400">Bus Type</th>
                         <th class="px-4 py-3 border border-gray-400">Capacity</th>
-                        <th class="px-4 py-3 border border-gray-400">Description</th>
                         <th class="px-4 py-3 border border-gray-400">Departure Time</th>
                         <th class="px-4 py-3 border border-gray-400">Arrival Time</th>
                         <th class="px-4 py-3 border border-gray-400">Driver</th>
@@ -68,7 +67,6 @@
                     <tr class="hover:bg-gray-100 transition bus-row" data-type="{{ $Bus->bus_type ?? '' }}">
                         <td class="px-4 py-2 border border-gray-400">{{ $Bus->bus_type ?? 'N/A' }}</td>
                         <td class="px-4 py-2 border border-gray-400">{{ $Bus->capacity ?? 'N/A' }}</td>
-                        <td class="px-4 py-2 border border-gray-400">{{ $Bus->description ?? 'N/A' }}</td>
                         <td class="px-4 py-2 border border-gray-400">{{ $Bus->departure_time ?? 'SELECT' }}</td>
                         <td class="px-4 py-2 border border-gray-400">{{ $Bus->arrival_time ?? 'SELECT' }}</td>
                         <td class="px-4 py-2 border border-gray-400">{{ $Bus->driver->name ?? 'SELECT' }}</td>

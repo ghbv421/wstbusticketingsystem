@@ -11,7 +11,6 @@ class Bus extends Model
     protected $fillable = [
         'bus_type',
         'capacity',
-        'description',
         'departure_time',
         'arrival_time',
         'driver_id',

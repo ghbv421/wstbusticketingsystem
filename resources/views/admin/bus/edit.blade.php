@@ -36,16 +36,6 @@
             </div>
 
             <div>
-                <label for="description" class="block text-gray-700 font-medium mb-1">Description</label>
-                <textarea id="description" name="description" rows="3"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter bus description">{{ old('description', $bus->description) }}</textarea>
-                @error('description')
-                    <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div>
                 <label for="departure_time" class="block text-gray-700 font-medium mb-1">Departure Time</label>
                 <input type="time" id="departure_time" name="departure_time" value="{{ old('departure_time', $bus->departure_time) }}"
                     class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />

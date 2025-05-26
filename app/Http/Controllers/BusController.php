@@ -31,7 +31,6 @@ class BusController extends Controller
         $data = $request->validate([
             'bus_type' => 'required|string|max:255',
             'capacity' => 'required|integer',
-            'description' => 'nullable|string',
             'departure_time' => 'nullable|date_format:H:i',
             'arrival_time' => 'nullable|date_format:H:i',
             'driver_id' => 'required|exists:users,id',
@@ -69,7 +68,6 @@ class BusController extends Controller
         $validated = $request->validate([
             'bus_type' => 'required|string|max:255',
             'capacity' => 'required|integer',
-            'description' => 'nullable|string',
             'departure_time' => 'required|date_format:H:i',
             'arrival_time' => 'required|date_format:H:i',
             'driver_id' => 'required|exists:users,id',

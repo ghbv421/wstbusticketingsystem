@@ -11,8 +11,7 @@ class Terminal extends Model
         'contact',
         'latitude',
         'longitude',
-        'address',
-        'city',
+        'location',
 
     ];
 }

@@ -130,8 +130,3 @@ Route::get('/print-ticket', [ConductorController::class, 'printTicket'])->name('
 
 //revenuesfrom condcutro
 Route::post('/revenue/store', [RevenueController::class, 'store'])->name('revenue.store');
-
-
-
-
-
